@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMBEAU - S'épanouir pour servir</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B00;
+            --primary-dark: #E05A00;
+            --primary-light: #FF8C3A;
+            --secondary-color: #FFD166;
+            --dark-color: #1A1A2E;
+            --dark-light: #2D2D44;
+            --light-color: #F8F9FA;
+            --accent-color: #6A0DAD;
+            --accent-light: #8A3BD8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 2rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin: 0 8px;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 12px !important;
+            border-radius: 4px;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+            background-color: rgba(255, 107, 0, 0.1);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--dark-color) 0%, #2D2D44 100%);
+        }
+        
+        .hero-slides-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(45, 45, 68, 0.7) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+        
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+        
+        .announcement-bar {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 12px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .announcement-text {
+            white-space: nowrap;
+            animation: scrollText 25s linear infinite;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .announcement-text i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border-radius: 10px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
+        .about-section, .domains-section, .spiritual-section, .team-section, .activities-section, .contribute-section, .contact-section {
+            padding: 100px 0;
+        }
+        
+        .about-section {
+            background-color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-section:before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .vision-box, .mission-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .vision-box:hover, .mission-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .vision-box:before, .mission-box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+        
+        .vision-box:before {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-light) 100%);
+        }
+        
+        .mission-box:before {
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--accent-light) 100%);
+        }
+        
+        .vision-box i, .mission-box i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .mission-box i {
+            color: var(--accent-color);
+        }
+        
+        .values-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .values-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 40px;
+            transition: all 0.3s;
+        }
+        
+        .values-list li:hover {
+            background-color: rgba(255, 107, 0, 0.05);
+            padding-left: 50px;
+        }
+        
+        .values-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 107, 0, 0.1);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .domain-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            background-color: white;
+            border: none;
+        }
+        
+        .domain-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .domain-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .domain-card:hover .domain-img {
+            transform: scale(1.05);
+        }
+        
+        .domain-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+        
+        .domain-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .domain-content {
+            padding: 25px;
+        }
+        
+        .domain-content h4 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .domain-contact {
+            background-color: rgba(255, 107, 0, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .spiritual-section {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(45, 45, 68, 0.9) 100%), url('https://source.unsplash.com/random/1200x800/?prayer,faith') center/cover no-repeat fixed;
+            color: white;
+            position: relative;
+        }
+        
+        .spiritual-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            height: 100%;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .spiritual-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .spiritual-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-photo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .team-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover .team-photo {
+            border-color: var(--primary-color);
+        }
+        
+        .team-social {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover .team-social {
+            opacity: 1;
+        }
+        
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .team-social a:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        .activity-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            background-color: white;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .activity-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.5s ease;
+        }
+        
+        .activity-card:hover .activity-img {
+            transform: scale(1.05);
+        }
+        
+        .activity-content {
+            padding: 25px;
+        }
+        
+        .contribute-section {
+            background-color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contribute-section:before {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .contribute-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contribute-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .contribute-box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        }
+        
+        .payment-method {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .contact-section {
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        .contact-section .section-title {
+            color: white;
+        }
+        
+        .contact-info {
+            background-color: var(--dark-light);
+            border-radius: 15px;
+            padding: 40px 30px;
+            height: 100%;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 107, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-form {
+            background-color: var(--dark-light);
+            border-radius: 15px;
+            padding: 40px 30px;
+        }
+        
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+            color: white;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .footer {
+            background-color: #151521;
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-links h5 {
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 50px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            padding: 10px 25px;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .about-section, .domains-section, .spiritual-section, .team-section, .activities-section, .contribute-section, .contact-section {
+                padding: 70px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-fire"></i>FLAMBEAU</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apropos">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#domaines">Domaines</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vie-spirituelle">Vie spirituelle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#equipe">Équipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#activites">Activités</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="evenement.html">Évènement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="accueil">
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+            <div class="floating-element" style="width: 60px; height: 60px; top: 70%; left: 10%; animation-delay: 1s;"></div>
+            <div class="floating-element" style="width: 100px; height: 100px; top: 20%; right: 5%; animation-delay: 2s;"></div>
+            <div class="floating-element" style="width: 50px; height: 50px; top: 80%; right: 15%; animation-delay: 3s;"></div>
+        </div>
+        
+        <div class="hero-slides-container">
+            <!-- Slide 1 -->
+            <div class="hero-slide active" style="background-image: url('equpe.jpg');">
+                <div class="hero-overlay"></div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="hero-slide" style="background-image: url('equipe2.jpg');">
+                <div class="hero-overlay"></div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="hero-slide" style="background-image: url('equipe3.jpg');">
+                <div class="hero-overlay"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Je suis un flambeau, je brille et je fais briller</h1>
+            <p class="hero-subtitle">Porteurs de lumière pour Christ, nous impactons positivement les nations</p>
+            <div class="hero-buttons">
+                <a href="#apropos" class="btn btn-primary btn-lg me-3">Découvrir notre mission</a>
+                <a href="#contact" class="btn btn-outline-primary btn-lg">Nous rejoindre</a>
+            </div>
+        </div>
+        
+        <!-- Announcement Bar -->
+        <div class="announcement-bar">
+            <div class="container">
+                <div class="announcement-text">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>✨ Rejoignez-nous pour notre prochaine réunion d'édification le Samedi 30 Août 2025 ✨ | Inscriptions ouvertes pour nos formations en communication et développement web ✨ | Nouveau projet agricole en cours de lancement ✨</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="apropos">
+        <div class="container">
+            <h2 class="section-title">À propos de FLAMBEAU</h2>
+            <p class="section-subtitle">Notre histoire, notre vision et nos valeurs fondamentales</p>
+            
+            <div class="row mb-5 align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h3 class="mb-4">Genèse & Histoire</h3>
+                    <p class="mb-4">Né en Mars 2025 d'une initiative de prière quotidienne, d'abord connue sous le nom <strong>PRIONS 13H</strong>, le mouvement a évolué pour devenir <strong>FLAMBEAU</strong> le <strong>1er Juin 2025</strong>. Porté par la vision « s'épanouir pour servir », FLAMBEAU incarne l'appel à être des porteurs de lumière pour Christ et à impacter positivement les nations.</p>
+                    <p>Inspiré par <em>Philippiens 2:15</em> : « afin que vous soyez irréprochables et purs, des enfants de Dieu sans défaut au milieu d'une génération perverse et corrompue, parmi laquelle vous brillez comme des flambeaux dans le monde. »</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKa1j4ppAypYWi1tFXEJ9VkW2Fn-c2N6nvww&s" alt="Histoire de FLAMBEAU" class="img-fluid rounded shadow-lg">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary rounded opacity-10"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="vision-box">
+                        <i class="fas fa-eye"></i>
+                        <h3 class="mb-3">Notre Vision</h3>
+                        <p class="lead mb-3">« S'épanouir pour servir »</p>
+                        <p>Être des porteurs de lumière pour Christ et impacter positivement les nations à travers des initiatives entrepreneuriales et spirituelles.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="mission-box">
+                        <i class="fas fa-bullseye"></i>
+                        <h3 class="mb-3">Notre Mission</h3>
+                        <p class="lead mb-3">Former, accompagner et impacter</p>
+                        <p>Former, accompagner et développer des initiatives dans divers domaines entrepreneuriaux, afin de favoriser l'épanouissement intégral de ses membres et de la communauté.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h3 class="text-center mb-4">Nos Valeurs Fondamentales</h3>
+                    <ul class="values-list">
+                        <li><strong>Intégrité</strong> - Honnêteté, transparence, respect des engagements</li>
+                        <li><strong>Excellence</strong> - Qualité dans tous les services rendus, amélioration continue</li>
+                        <li><strong>Collaboration</strong> - Travail d'équipe, soutien mutuel, communication ouverte</li>
+                        <li><strong>Engagement spirituel</strong> - Prière, humilité, service, sanctification</li>
+                        <li><strong>Innovation</strong> - Créativité, adaptation, proposition d'idées nouvelles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Domaines d'activités -->
+    <section class="domains-section" id="domaines">
+        <div class="container">
+            <h2 class="section-title">Nos Domaines d'Activités</h2>
+            <p class="section-subtitle">Des initiatives entrepreneuriales pour impacter positivement notre communauté</p>
+            
+            <div class="row">
+                <!-- Communication -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="domain-card">
+                        <div class="domain-img" style="background-image: url('https://source.unsplash.com/random/600x400/?communication,media')">
+                            <div class="domain-overlay">
+                                <div class="domain-icon">
+                                    <i class="fas fa-broadcast-tower"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domain-content">
+                            <h4>Communication</h4>
+                            <p>Conseil, branding, graphisme, production de contenus, régie publicitaire, relations médias, événements, impression et tous services relatifs à la communication.</p>
+                            <div class="domain-contact">
+                                <p><strong>Responsable:</strong> Mme Kadirath Lah-AHLIN</p>
+                                <p><strong>Contact:</strong> 01 66 39 53 79</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Restauration -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="domain-card">
+                        <div class="domain-img" style="background-image: url('https://source.unsplash.com/random/600x400/?restaurant,food')">
+                            <div class="domain-overlay">
+                                <div class="domain-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domain-content">
+                            <h4>Restauration</h4>
+                            <p>Spécialisés dans le met Athelè + Dèguè. Traiteur, événements culinaires, livraison, et tous autres services liés à la restauration.</p>
+                            <div class="domain-contact">
+                                <p><strong>Responsable:</strong> Mme Déborah CHABI</p>
+                                <p><strong>Contact:</strong> 01 97 62 91 58</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cinéma & Audiovisuel -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="domain-card">
+                        <div class="domain-img" style="background-image: url('https://source.unsplash.com/random/600x400/?cinema,film')">
+                            <div class="domain-overlay">
+                                <div class="domain-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domain-content">
+                            <h4>Cinéma & Audiovisuel</h4>
+                            <p>Projection de films pour l'édification des vies, écriture, production, tournage, montage, distribution locale, éducation à l'image.</p>
+                            <div class="domain-contact">
+                                <p><strong>Responsable:</strong> Mlle AOGOU Grâcia</p>
+                                <p><strong>Contact:</strong> 01 52 25 85 91</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Informatique & Électronique -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="domain-card">
+                        <div class="domain-img" style="background-image: url('https://source.unsplash.com/random/600x400/?technology,computer')">
+                            <div class="domain-overlay">
+                                <div class="domain-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domain-content">
+                            <h4>Informatique & Électronique</h4>
+                            <p>Maintenance, réseau, dépannage, assemblage, vente d'accessoires, développement web, mobile et desktop, formation.</p>
+                            <div class="domain-contact">
+                                <p><strong>Responsable:</strong> M Kévin ZANNOU</p>
+                                <p><strong>Contact:</strong> 01 95 54 89 25</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Couture -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="domain-card">
+                        <div class="domain-img" style="background-image: url('https://source.unsplash.com/random/600x400/?sewing,fashion')">
+                            <div class="domain-overlay">
+                                <div class="domain-icon">
+                                    <i class="fas fa-tshirt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domain-content">
+                            <h4>Couture</h4>
+                            <p>Services de couture sur mesure pour entreprises et particuliers, alliant qualité, confort et style.</p>
+                            <div class="domain-contact">
+                                <p><strong>Responsable:</strong> Mlle Adéline CHABI</p>
+                                <p><strong>Contact:</strong> 01 69 95 67 23</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agriculture & Environnement -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="domain-card">
+                        <div class="domain-img" style="background-image: url('https://source.unsplash.com/random/600x400/?agriculture,farm')">
+                            <div class="domain-overlay">
+                                <div class="domain-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domain-content">
+                            <h4>Agriculture & Environnement</h4>
+                            <p>Initiatives agricoles durables, protection de l'environnement, projets écologiques communautaires.</p>
+                            <div class="domain-contact">
+                                <p><strong>Responsable:</strong> M Kévin ZANNOU</p>
+                                <p><strong>Contact:</strong> 01 95 54 89 25</p>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary mt-3">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vie Spirituelle -->
+    <section class="spiritual-section" id="vie-spirituelle">
+        <div class="container">
+            <h2 class="section-title text-white">Vie Spirituelle</h2>
+            <p class="section-subtitle text-white">Nourrir notre foi pour mieux servir notre communauté</p>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="spiritual-card">
+                        <i class="fas fa-church"></i>
+                        <h4>Centres d'édification</h4>
+                        <p>Espaces de croissance spirituelle, de réflexion, d'inspiration et de prière pour nourrir la foi et renforcer les valeurs morales.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="spiritual-card">
+                        <i class="fas fa-pray"></i>
+                        <h4>Thèmes de prière</h4>
+                        <p>Méditations quotidiennes et thèmes de prière mensuels pour accompagner votre cheminement spirituel.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="spiritual-card">
+                        <i class="fas fa-book-open"></i>
+                        <h4>Ressources spirituelles</h4>
+                        <p>Articles, versets du mois, témoignages et messages inspirants pour fortifier votre foi.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary btn-lg">Rejoindre nos moments d'édification</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membres & Équipe -->
+    <section class="team-section" id="equipe">
+        <div class="container">
+            <h2 class="section-title">Notre Équipe</h2>
+            <p class="section-subtitle">Des leaders engagés au service de notre vision commune</p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div class="team-member">
+                        <div class="team-photo-container">
+                            <img src="Quentin.jpeg" alt="Quentin SACLA" class="team-photo">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h4>Quentin SACLA</h4>
+                        <p class="text-primary">Président</p>
+                        <p>01 61 92 45 32</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-5">
+                    <div class="team-member">
+                        <div class="team-photo-container">
+                            <img src="https://source.unsplash.com/random/300x300/?portrait,woman,leader" alt="Christabelle ASSOGBA" class="team-photo">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h4>Christabelle ASSOGBA</h4>
+                        <p class="text-primary">Vice-Présidente</p>
+                        <p>01 96 22 63 13</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-5">
+                    <div class="team-member">
+                        <div class="team-photo-container">
+                            <img src="https://source.unsplash.com/random/300x300/?portrait,woman,professional" alt="Débora CHABI" class="team-photo">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h4>Débora CHABI</h4>
+                        <p class="text-primary">Trésorière</p>
+                        <p>01 97 62 91 58</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-5">
+                    <div class="team-member">
+                        <div class="team-photo-container">
+                            <img src="Kadirath.jpg" alt="Kadirath Lah AHLIN" class="team-photo">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h4>Kadirath Lah AHLIN</h4>
+                        <p class="text-primary">Trésorière Adjointe</p>
+                        <p>01 66 39 53 79</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-5">
+                    <div class="team-member">
+                        <div class="team-photo-container">
+                            <img src="https://source.unsplash.com/random/300x300/?portrait,man,professional" alt="Kevin ZANNOU" class="team-photo">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h4>Kevin ZANNOU</h4>
+                        <p class="text-primary">Secrétaire</p>
+                        <p>01 95 54 89 25</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-5">
+                    <div class="team-member">
+                        <div class="team-photo-container">
+                            <img src="https://source.unsplash.com/random/300x300/?portrait,woman,director" alt="Yolande KPADONOU" class="team-photo">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <h4>Yolande KPADONOU</h4>
+                        <p class="text-primary">Directrice des Affaires</p>
+                        <p>01 52 00 65 71</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <h3 class="mb-4">Parrain du Groupe</h3>
+                <div class="team-member">
+                    <div class="team-photo-container">
+                        <img src="https://source.unsplash.com/random/300x300/?portrait,man,mentor" alt="Valery ANGO" class="team-photo">
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <h4>Valery ANGO</h4>
+                    <p class="text-primary">Parrain du Groupe</p>
+                    <p>01 97 31 31 34</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activités & Projets -->
+    <section class="activities-section" id="activites">
+        <div class="container">
+            <h2 class="section-title">Activités & Projets</h2>
+            <p class="section-subtitle">Nos initiatives en cours et à venir pour servir notre communauté</p>
+            
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="activity-card">
+                        <div class="activity-img" style="background-image: url('https://source.unsplash.com/random/600x400/?event,meeting')"></div>
+                        <div class="activity-content">
+                            <h4>Réunions mensuelles d'édification</h4>
+                            <p>Chaque dernier samedi du mois, nous nous réunissons pour prier, partager et nous édifier mutuellement.</p>
+                            <a href="#" class="btn btn-outline-primary">Voir le calendrier</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="activity-card">
+                        <div class="activity-img" style="background-image: url('https://source.unsplash.com/random/600x400/?training,workshop')"></div>
+                        <div class="activity-content">
+                            <h4>Formations professionnelles</h4>
+                            <p>Programmes de formation dans nos différents domaines d'activité pour le développement des compétences.</p>
+                            <a href="#" class="btn btn-outline-primary">S'inscrire</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="activity-card">
+                        <div class="activity-img" style="background-image: url('https://source.unsplash.com/random/600x400/?project,community')"></div>
+                        <div class="activity-content">
+                            <h4>Projets communautaires</h4>
+                            <p>Initiatives entrepreneuriales à forte utilité sociale pour impacter positivement notre communauté.</p>
+                            <a href="#" class="btn btn-outline-primary">Participer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="btn btn-primary me-3">Voir nos réalisations</a>
+                <a href="#" class="btn btn-outline-primary">Télécharger le rapport d'activités</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contribuer / Nous soutenir -->
+    <section class="contribute-section" id="contribuer">
+        <div class="container">
+            <h2 class="section-title">Contribuer & Nous Soutenir</h2>
+            <p class="section-subtitle">Votre soutien nous permet d'étendre notre impact et de poursuivre notre mission</p>
+            
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="lead">Votre soutien nous permet de poursuivre notre mission de former, accompagner et impacter les nations par la lumière du Christ. Ensemble, nous pouvons faire briller davantage de flambeaux.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="contribute-box">
+                        <div class="payment-method">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Mobile Money</h4>
+                        <p>Faites vos dons via Mobile Money aux numéros suivants :</p>
+                        <p><strong>MTN:</strong> 01 61 92 45 32</p>
+                        <p><strong>Moov:</strong> 01 97 62 91 58</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="contribute-box">
+                        <div class="payment-method">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h4>Compte Bancaire</h4>
+                        <p>Effectuez vos virements sur notre compte bancaire :</p>
+                        <p><strong>Banque:</strong> À préciser après enregistrement</p>
+                        <p><strong>Numéro de compte:</strong> À communiquer</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="contribute-box">
+                        <div class="payment-method">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h4>Bénévolat & Partenariats</h4>
+                        <p>Rejoignez-nous en tant que bénévole ou partenaire pour soutenir nos initiatives.</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Nous contacter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-nous</h2>
+            <p class="section-subtitle">Nous sommes à votre écoute pour toute question ou collaboration</p>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-info">
+                        <h4 class="mb-4">Coordonnées</h4>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Adresse</h5>
+                                <p>Commune d'Abomey Calavi, Adresse complète à insérer après enregistrement</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>Téléphone</h5>
+                                <p>Président: 01 61 92 45 32</p>
+                                <p>Secrétaire: 01 95 54 89 25</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p>contact@flambeau.org</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links mt-4">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8">
+                    <div class="contact-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Nom complet</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Sujet</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <a href="#" class="footer-logo"><i class="fas fa-fire"></i>FLAMBEAU</a>
+                    <p>« S'épanouir pour servir » - Former, accompagner et impacter les nations par la lumière du Christ.</p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Liens rapides</h5>
+                        <ul>
+                            <li><a href="#accueil">Accueil</a></li>
+                            <li><a href="#apropos">À propos</a></li>
+                            <li><a href="#domaines">Nos domaines</a></li>
+                            <li><a href="#vie-spirituelle">Vie spirituelle</a></li>
+                            <li><a href="#equipe">Notre équipe</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Domaines d'activités</h5>
+                        <ul>
+                            <li><a href="#">Communication</a></li>
+                            <li><a href="#">Restauration</a></li>
+                            <li><a href="#">Cinéma & Audiovisuel</a></li>
+                            <li><a href="#">Informatique</a></li>
+                            <li><a href="#">Couture</a></li>
+                            <li><a href="#">Agriculture</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>Newsletter</h5>
+                        <p>Abonnez-vous pour recevoir nos actualités et événements</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Votre email">
+                            <button class="btn btn-primary" type="button">S'abonner</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FLAMBEAU. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Hero Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                currentSlide = (n + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+            
+            // Change slide every 5 seconds
+            setInterval(nextSlide, 5000);
+            
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.vision-box, .mission-box, .domain-card, .spiritual-card, .team-member, .activity-card, .contribute-box');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state for animated elements
+            const animatedElements = document.querySelectorAll('.vision-box, .mission-box, .domain-card, .spiritual-card, .team-member, .activity-card, .contribute-box');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            // Trigger once on load
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
