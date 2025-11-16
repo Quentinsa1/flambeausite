@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -22,6 +22,10 @@
             --light-color: #F8F9FA;
             --accent-color: #6A0DAD;
             --accent-light: #8A3BD8;
+            --success-color: #2ECC71;
+            --gold-color: #D4AF37;
+            --spiritual-blue: #4A6FA5;
+            --spiritual-purple: #6B4E71;
         }
         
         * {
@@ -43,50 +47,57 @@
             line-height: 1.3;
         }
         
+        .spiritual-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
         .navbar {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
             padding: 15px 0;
         }
         
         .navbar.scrolled {
-            padding: 10px 0;
+            padding: 12px 0;
             background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
         
         .navbar-brand {
-            font-weight: 800;
+            font-weight: 900;
             color: var(--primary-color);
-            font-size: 2rem;
+            font-size: 2.2rem;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
         }
         
         .navbar-brand i {
-            margin-right: 8px;
-            font-size: 1.8rem;
+            margin-right: 10px;
+            font-size: 2rem;
         }
         
         .nav-link {
             font-weight: 500;
             color: var(--dark-color);
-            margin: 0 8px;
+            margin: 0 10px;
             transition: all 0.3s;
             position: relative;
-            padding: 8px 12px !important;
-            border-radius: 4px;
+            padding: 8px 16px !important;
+            border-radius: 8px;
         }
         
         .nav-link:hover {
             color: var(--primary-color);
-            background-color: rgba(255, 107, 0, 0.1);
+            background-color: rgba(255, 107, 0, 0.08);
         }
         
         .nav-link.active {
             color: var(--primary-color);
+            font-weight: 600;
         }
         
         .nav-link.active:after {
@@ -95,13 +106,14 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 2px;
-            background-color: var(--primary-color);
+            width: 25px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border-radius: 10px;
         }
         
         .event-hero {
-            height: 70vh;
+            height: 85vh;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -109,6 +121,37 @@
             background: linear-gradient(135deg, var(--dark-color) 0%, #2D2D44 100%);
             color: white;
             text-align: center;
+        }
+        
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.5;
+            }
         }
         
         .event-hero-content {
@@ -119,50 +162,74 @@
         }
         
         .event-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 25px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            line-height: 1.2;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .event-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
+            font-size: 1.8rem;
+            margin-bottom: 35px;
             opacity: 0.9;
+            font-weight: 400;
         }
         
         .event-date {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+            font-size: 2rem;
+            margin-bottom: 40px;
             color: var(--secondary-color);
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         
         .btn-badge {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             border: none;
-            padding: 15px 40px;
+            padding: 18px 50px;
             font-weight: 600;
             border-radius: 50px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
-            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
+            font-size: 1.3rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-badge:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            transition: all 0.4s ease;
+            z-index: -1;
         }
         
         .btn-badge:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.4);
             color: white;
         }
         
+        .btn-badge:hover:before {
+            width: 100%;
+        }
+        
         .section-title {
-            font-size: 2.8rem;
-            font-weight: 800;
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--dark-color);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
             position: relative;
         }
@@ -170,275 +237,752 @@
         .section-title:after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 5px;
+            width: 120px;
+            height: 6px;
             background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
             border-radius: 10px;
         }
         
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
         .program-section, .badge-section {
-            padding: 100px 0;
+            padding: 120px 0;
         }
         
         .program-section {
             background-color: white;
-        }
-        
-        .timeline {
             position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
+            overflow: hidden;
         }
         
-        .timeline::after {
+        .program-section:before {
             content: '';
             position: absolute;
-            width: 6px;
-            background-color: var(--primary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 10px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background-color: white;
-            border: 4px solid var(--primary-color);
-            top: 15px;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
             border-radius: 50%;
+            opacity: 0.05;
+        }
+        
+        .program-section:after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            border-radius: 50%;
+            opacity: 0.05;
+        }
+        
+        .program-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            background-color: white;
+            border: none;
+            position: relative;
             z-index: 1;
         }
         
-        .left {
+        .program-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .program-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
             left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
         }
         
-        .right {
-            left: 50%;
+        .program-card-content {
+            padding: 40px 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
-        .left::after {
-            right: -13px;
+        .program-card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.2);
         }
         
-        .right::after {
-            left: -13px;
-        }
-        
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-        }
-        
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-        }
-        
-        .timeline-time {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-        
-        .timeline-title {
-            font-weight: 600;
-            margin-bottom: 10px;
+        .program-card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
             color: var(--dark-color);
         }
         
         .badge-section {
             background-color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .badge-section:before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            border-radius: 50%;
+            opacity: 0.05;
         }
         
         .badge-form-container {
             background-color: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
         }
         
         .form-control {
-            padding: 12px 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #e0e0e0;
             transition: all 0.3s;
+            font-size: 1rem;
         }
         
         .form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
         }
         
         .badge-preview-container {
             background-color: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             display: none;
+            position: relative;
+            z-index: 1;
         }
         
+        /* NOUVEAU STYLE DU BADGE */
         .badge-preview {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
-            border: 2px solid var(--primary-color);
-            border-radius: 15px;
+            border-radius: 25px;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--dark-color) 0%, #2D2D44 100%);
+            background: linear-gradient(135deg, #1a2a6c, #2d2d44, #1a1a2e);
             color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 30px;
             position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .badge-preview:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(106, 13, 173, 0.15) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .badge-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
+            animation: glowRotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes glowRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .badge-header {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
         }
         
         .badge-logo {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold-color);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            letter-spacing: 2px;
         }
         
         .badge-event-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .badge-event-date {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
-        
-        .badge-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            margin: 0 auto 20px;
-        }
-        
-        .badge-name {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 10px;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+        
+        .badge-event-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        .badge-event-date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 500;
+            color: var(--gold-color);
+        }
+        
+        .badge-divider {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
+            margin: 20px auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge-photo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            z-index: 2;
+        }
+        
+        .badge-photo-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--gold-color), var(--primary-color));
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .badge-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--dark-color);
+        }
+        
+        .badge-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--dark-color), var(--spiritual-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-color);
+            font-size: 3.5rem;
+            border: 3px solid var(--dark-color);
+        }
+        
+        .badge-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
         
         .badge-phone {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
             opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            font-family: 'Poppins', sans-serif;
         }
         
         .badge-footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            margin-top: 30px;
+            font-size: 1rem;
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--gold-color);
+        }
+        
+        .badge-qr {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-color);
+            font-size: 2rem;
+            z-index: 2;
         }
         
         .btn-download {
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
             border: none;
-            padding: 12px 30px;
-            font-weight: 500;
+            padding: 15px 40px;
+            font-weight: 600;
             border-radius: 50px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.3);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
             color: white;
-            margin-top: 20px;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-download:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            transition: all 0.4s ease;
+            z-index: -1;
         }
         
         .btn-download:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.4);
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-color) 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
             color: white;
+        }
+        
+        .btn-download:hover:before {
+            width: 100%;
+        }
+        
+        .btn-social {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border: none;
+            padding: 15px 40px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
+            color: white;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-social:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn-social:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.4);
+            color: white;
+        }
+        
+        .btn-social:hover:before {
+            width: 100%;
+        }
+        
+        .download-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-share {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .social-share h4 {
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon.instagram {
+            background: linear-gradient(135deg, #E4405F 0%, #C13584 100%);
+        }
+        
+        .social-icon.facebook {
+            background: linear-gradient(135deg, #1877F2 0%, #0A7CFF 100%);
+        }
+        
+        .social-icon.twitter {
+            background: linear-gradient(135deg, #1DA1F2 0%, #1A91DA 100%);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
         .footer {
             background-color: #151521;
             color: white;
-            padding: 70px 0 20px;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
         }
         
         .footer-logo {
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 2.2rem;
+            font-weight: 900;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: inline-block;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            margin-right: 12px;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h5 {
+            color: white;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 8px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            margin-top: 60px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .event-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
         }
         
         @media (max-width: 992px) {
             .event-title {
-                font-size: 2.8rem;
+                font-size: 3rem;
+            }
+            
+            .event-subtitle {
+                font-size: 1.6rem;
+            }
+            
+            .event-date {
+                font-size: 1.8rem;
             }
             
             .section-title {
-                font-size: 2.3rem;
+                font-size: 2.5rem;
             }
             
-            .timeline::after {
-                left: 31px;
+            .program-section, .badge-section {
+                padding: 100px 0;
             }
             
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
+            .badge-form-container, .badge-preview-container {
+                padding: 40px;
             }
             
-            .timeline-item::after {
-                left: 18px;
+            .download-options {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .left::after, .right::after {
-                left: 18px;
+            .badge-preview {
+                max-width: 400px;
             }
         }
         
         @media (max-width: 768px) {
+            .event-hero {
+                height: 80vh;
+            }
+            
+            .event-title {
+                font-size: 2.5rem;
+            }
+            
+            .event-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .event-date {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .program-section, .badge-section {
+                padding: 80px 0;
+            }
+            
+            .badge-form-container, .badge-preview-container {
+                padding: 30px;
+            }
+            
+            .btn-badge {
+                padding: 16px 40px;
+                font-size: 1.2rem;
+            }
+            
+            .badge-preview {
+                padding: 30px 20px;
+                max-width: 350px;
+            }
+            
+            .badge-logo {
+                font-size: 2.5rem;
+            }
+            
+            .badge-event-title {
+                font-size: 1.5rem;
+            }
+            
+            .badge-name {
+                font-size: 1.8rem;
+            }
+            
+            .badge-photo-frame {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .event-hero {
+                height: 75vh;
+            }
+            
             .event-title {
                 font-size: 2.2rem;
+            }
+            
+            .event-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .event-date {
+                font-size: 1.4rem;
             }
             
             .section-title {
                 font-size: 2rem;
             }
             
-            .program-section, .badge-section {
-                padding: 70px 0;
+            .btn-badge {
+                padding: 14px 35px;
+                font-size: 1.1rem;
+            }
+            
+            .program-card-content {
+                padding: 30px 20px;
             }
             
             .badge-form-container, .badge-preview-container {
                 padding: 25px;
+            }
+            
+            .badge-preview {
+                padding: 25px 15px;
+                max-width: 300px;
+            }
+            
+            .badge-logo {
+                font-size: 2.2rem;
+            }
+            
+            .badge-event-title {
+                font-size: 1.3rem;
+            }
+            
+            .badge-name {
+                font-size: 1.6rem;
+            }
+            
+            .badge-photo-frame {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .badge-qr {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .event-title {
+                font-size: 1.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .badge-form-container, .badge-preview-container {
+                padding: 20px;
+            }
+            
+            .download-options {
+                gap: 10px;
+            }
+            
+            .btn-download, .btn-social {
+                padding: 12px 30px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -472,11 +1016,12 @@
 
     <!-- Event Hero Section -->
     <section class="event-hero" id="evenement">
+        <div class="hero-particles" id="heroParticles"></div>
         <div class="container">
             <div class="event-hero-content">
-                <h1 class="event-title">Reconnecter à la Source</h1>
+                <h1 class="event-title spiritual-title">Reconnecter à la Source</h1>
                 <p class="event-subtitle">Libérer son don pour réussir dans tous les domaines de la vie</p>
-                <div class="event-date">Samedi 30 Août 2025 | 18h00 - 21h30</div>
+                <div class="event-date">Samedi 29 Novembre 2025 | 18h00 - 21h30</div>
                 <button class="btn btn-badge" id="generateBadgeBtn">Générer mon badge "J'y serai"</button>
             </div>
         </div>
@@ -486,68 +1031,97 @@
     <section class="program-section">
         <div class="container">
             <h2 class="section-title">Programme de l'Événement</h2>
+            <p class="section-subtitle">Découvrez les moments forts de cette soirée transformatrice</p>
             
-            <div class="timeline">
-                <!-- Timeline Item 1 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-time">18h00 – 18h20</div>
-                        <h3 class="timeline-title">Accueil & Ambiance de reconnexion</h3>
-                        <p>Fond musical d'adoration douce. Équipe d'accueil chaleureuse. Distribution d'un petit papier avec la consigne : « Qu'est-ce qui m'empêche de réussir pleinement ? » Temps de silence intérieur / courte prière d'ouverture.</p>
+            <div class="row">
+                <!-- Program Card 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="program-card-title">Accueil & Ambiance de reconnexion</h3>
+                            <p>Fond musical d'adoration douce. Équipe d'accueil chaleureuse. Distribution d'un petit papier avec la consigne : « Qu'est-ce qui m'empêche de réussir pleinement ? » Temps de silence intérieur / courte prière d'ouverture.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 2 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-time">18h20 – 19h00</div>
-                        <h3 class="timeline-title">Louange et Adoration</h3>
-                        <p>Louange dynamique : célébrer la grandeur de Dieu, la Source de toute ressource. Adoration profonde : créer une atmosphère de connexion intérieure et spirituelle. Objectif : disposer les cœurs à la transformation.</p>
+                <!-- Program Card 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-hands-praying"></i>
+                            </div>
+                            <h3 class="program-card-title">Louange et Adoration</h3>
+                            <p>Louange dynamique : célébrer la grandeur de Dieu, la Source de toute ressource. Adoration profonde : créer une atmosphère de connexion intérieure et spirituelle. Objectif : disposer les cœurs à la transformation.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 3 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-time">19h00 – 19h30</div>
-                        <h3 class="timeline-title">Activité interactive : "Se faire un ami"</h3>
-                        <p>Chaque participant échange avec quelqu'un de nouveau. Chacun partage une qualité, un don ou une grâce qu'il reconnaît chez lui ou chez l'autre. Temps d'encouragements réciproques. Se conclut par un court moment de réseautage spirituel.</p>
+                <!-- Program Card 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3 class="program-card-title">Activité interactive : "Se faire un ami"</h3>
+                            <p>Chaque participant échange avec quelqu'un de nouveau. Chacun partage une qualité, un don ou une grâce qu'il reconnaît chez lui ou chez l'autre. Temps d'encouragements réciproques. Se conclut par un court moment de réseautage spirituel.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 4 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-time">19h30 – 19h45</div>
-                        <h3 class="timeline-title">Adoration d'approfondissement</h3>
-                        <p>Retour dans la présence de Dieu à travers un chant méditatif. Exemples : "Je reviens à la Source", "Saint-Esprit viens", "Tout est à toi". Transition douce vers le message central.</p>
+                <!-- Program Card 4 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-pray"></i>
+                            </div>
+                            <h3 class="program-card-title">Adoration d'approfondissement</h3>
+                            <p>Retour dans la présence de Dieu à travers un chant méditatif. Exemples : "Je reviens à la Source", "Saint-Esprit viens", "Tout est à toi". Transition douce vers le message central.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 5 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-time">19h45 – 20h30</div>
-                        <h3 class="timeline-title">Communication principale</h3>
-                        <p>"Reconnecter à la Source de mes ressources" - Enseignement/partage structuré autour de trois vérités : Dieu, la Source de toute capacité. L'âme, le corps et l'esprit : comprendre l'équilibre intérieur. Libérer son don pour manifester la réussite divine.</p>
+                <!-- Program Card 5 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <h3 class="program-card-title">Communication principale</h3>
+                            <p>"Reconnecter à la Source de mes ressources" - Enseignement/partage structuré autour de trois vérités : Dieu, la Source de toute capacité. L'âme, le corps et l'esprit : comprendre l'équilibre intérieur. Libérer son don pour manifester la réussite divine.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 6 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <div class="timeline-time">20h35 – 21h10</div>
-                        <h3 class="timeline-title">Acte symbolique : Libérer les blocages</h3>
-                        <p>Chacun s'avance pour déposer son papier (dans une urne ou un feu symbolique). Lecture de quelques papiers (sans noms) pour illustrer les luttes communes. Moment de prière intense et prophétique pour briser les blocages, libérer les dons et reconnecter à la Source.</p>
+                <!-- Program Card 6 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3 class="program-card-title">Acte symbolique : Libérer les blocages</h3>
+                            <p>Chacun s'avance pour déposer son papier (dans une urne ou un feu symbolique). Lecture de quelques papiers (sans noms) pour illustrer les luttes communes. Moment de prière intense et prophétique pour briser les blocages, libérer les dons et reconnecter à la Source.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 7 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <div class="timeline-time">21h10 – 21h30</div>
-                        <h3 class="timeline-title">Clôture & Envoi</h3>
-                        <p>Prix de clôture : engagement à vivre selon l'Esprit. Témoignage d'une personne transformée par la reconnexion à Dieu. Mot de fin inspirant : bénédiction et rappel de la mission personnelle. Chant final collectif : "Nous sommes une génération choisie". Sortie joyeuse, musique festive, fraternité, cocktail.</p>
+                <!-- Program Card 7 -->
+                <div class="col-lg-8 mx-auto mb-4">
+                    <div class="program-card">
+                        <div class="program-card-content">
+                            <div class="program-card-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="program-card-title">Clôture & Envoi</h3>
+                            <p>Prix de clôture : engagement à vivre selon l'Esprit. Témoignage d'une personne transformée par la reconnexion à Dieu. Mot de fin inspirant : bénédiction et rappel de la mission personnelle. Chant final collectif : "Nous sommes une génération choisie". Sortie joyeuse, musique festive, fraternité, cocktail.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -558,6 +1132,7 @@
     <section class="badge-section" id="badge">
         <div class="container">
             <h2 class="section-title">Générer votre badge</h2>
+            <p class="section-subtitle">Créez votre badge personnalisé pour confirmer votre participation</p>
             
             <!-- Badge Form -->
             <div class="badge-form-container" id="badgeFormContainer">
@@ -565,19 +1140,19 @@
                 <form id="badgeForm">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label for="firstName" class="form-label">Prénom</label>
                                 <input type="text" class="form-control" id="firstName" required>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label for="lastName" class="form-label">Nom</label>
                                 <input type="text" class="form-control" id="lastName" required>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="phone" class="form-label">Téléphone</label>
                         <input type="tel" class="form-control" id="phone" required>
                     </div>
@@ -596,18 +1171,62 @@
             <div class="badge-preview-container" id="badgePreviewContainer">
                 <h3 class="text-center mb-4">Votre badge "J'y serai"</h3>
                 <div class="badge-preview" id="badgePreview">
+                    <div class="badge-glow"></div>
+                    
                     <div class="badge-header">
                         <div class="badge-logo">FLAMBEAU</div>
-                        <div class="badge-event-title">Reconnecter à la Source</div>
-                        <div class="badge-event-date">Samedi 30 Août 2025 | 18h00 - 21h30</div>
+                        <div class="badge-event-title spiritual-title">Reconnecter à la Source</div>
+                        <div class="badge-event-subtitle">Libérer son don pour réussir dans tous les domaines de la vie</div>
+                        <div class="badge-event-date">Samedi 29 Novembre 2025 | 18h00 - 21h30</div>
                     </div>
-                    <img id="badgePhoto" src="" alt="Photo" class="badge-photo" style="display: none;">
-                    <div class="badge-name" id="badgeName">Nom Prénom</div>
-                    <div class="badge-phone" id="badgePhone">Téléphone</div>
-                    <div class="badge-footer">Je m'engage à participer à cet événement transformateur</div>
+                    
+                    <div class="badge-divider"></div>
+                    
+                    <div class="badge-photo-container">
+                        <div class="badge-photo-frame">
+                            <img id="badgePhoto" src="" alt="Photo" class="badge-photo" style="display: none;">
+                            <div class="badge-photo-placeholder" id="badgePhotoPlaceholder" style="display: flex;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="badge-name spiritual-title" id="badgeName">Nom Prénom</div>
+                    <div class="badge-phone">Téléphone Organisateur: +2290166395379 / +22901 000000000</div>
+
+                    <div class="badge-phone">Téléphone particpant:</div>                    
+                    <div class="badge-phone" id="badgePhone">Téléphone particpant</div>                    
+                    <div class="badge-divider"></div>
+                    
+                    <div class="badge-footer">Je m'engage à participer à cet événement. J'y serai</div>
+                    
+                    <div class="badge-qr">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
                 </div>
-                <div class="text-center mt-4">
-                    <button class="btn btn-download" id="downloadBadgeBtn">Télécharger le badge (PDF)</button>
+                
+                <div class="download-options">
+                    <button class="btn btn-download" id="downloadPdfBtn">
+                        <i class="fas fa-file-pdf me-2"></i>Télécharger en PDF
+                    </button>
+                    <button class="btn btn-social" id="downloadImageBtn">
+                        <i class="fas fa-image me-2"></i>Télécharger en Image
+                    </button>
+                </div>
+                
+                <div class="social-share">
+                    <h4>Partagez sur les réseaux sociaux</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon instagram" id="shareInstagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon facebook" id="shareFacebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon twitter" id="shareTwitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -617,9 +1236,9 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-4">
+                <div class="col-lg-4 mb-5">
                     <a href="index.html" class="footer-logo"><i class="fas fa-fire"></i>FLAMBEAU</a>
-                    <p>« S'épanouir pour servir » - Former, accompagner et impacter les nations par la lumière du Christ.</p>
+                    <p class="mt-3">« S'épanouir pour servir » - Former, accompagner et impacter les nations par la lumière du Christ.</p>
                     <div class="social-links mt-4">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -628,7 +1247,7 @@
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 mb-4">
+                <div class="col-lg-2 col-md-6 mb-5">
                     <div class="footer-links">
                         <h5>Liens rapides</h5>
                         <ul>
@@ -640,7 +1259,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 mb-5">
                     <div class="footer-links">
                         <h5>Informations</h5>
                         <ul>
@@ -650,7 +1269,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-4">
+                <div class="col-lg-3 mb-5">
                     <div class="footer-links">
                         <h5>Contact</h5>
                         <p>Email: contact@flambeau.org</p>
@@ -675,8 +1294,40 @@
             const badgeName = document.getElementById('badgeName');
             const badgePhone = document.getElementById('badgePhone');
             const badgePhoto = document.getElementById('badgePhoto');
+            const badgePhotoPlaceholder = document.getElementById('badgePhotoPlaceholder');
             const generateBadgeBtn = document.getElementById('generateBadgeBtn');
-            const downloadBadgeBtn = document.getElementById('downloadBadgeBtn');
+            const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+            const downloadImageBtn = document.getElementById('downloadImageBtn');
+            const shareInstagram = document.getElementById('shareInstagram');
+            const shareFacebook = document.getElementById('shareFacebook');
+            const shareTwitter = document.getElementById('shareTwitter');
+            const heroParticles = document.getElementById('heroParticles');
+            
+            let currentBadgeImage = null;
+            
+            // Create floating particles in hero section
+            function createParticles() {
+                const particlesCount = 15;
+                for (let i = 0; i < particlesCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 60 + 20;
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const delay = Math.random() * 15;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.top = `${posY}%`;
+                    particle.style.left = `${posX}%`;
+                    particle.style.animationDelay = `${delay}s`;
+                    
+                    heroParticles.appendChild(particle);
+                }
+            }
+            
+            createParticles();
             
             // Scroll to badge section when "Générer mon badge" is clicked
             generateBadgeBtn.addEventListener('click', function() {
@@ -703,22 +1354,27 @@
                     reader.onload = function(e) {
                         badgePhoto.src = e.target.result;
                         badgePhoto.style.display = 'block';
+                        badgePhotoPlaceholder.style.display = 'none';
                     };
                     reader.readAsDataURL(photoFile);
                 } else {
                     badgePhoto.style.display = 'none';
+                    badgePhotoPlaceholder.style.display = 'flex';
                 }
                 
                 // Show badge preview and hide form
                 badgeFormContainer.style.display = 'none';
                 badgePreviewContainer.style.display = 'block';
+                
+                // Scroll to badge preview
+                badgePreviewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
             
-            // Handle badge download
-            downloadBadgeBtn.addEventListener('click', function() {
+            // Handle PDF download
+            downloadPdfBtn.addEventListener('click', function() {
                 // Use html2canvas to capture the badge as an image
                 html2canvas(badgePreview, {
-                    scale: 2,
+                    scale: 3,
                     useCORS: true,
                     logging: false,
                     backgroundColor: null
@@ -746,6 +1402,62 @@
                 });
             });
             
+            // Handle image download
+            downloadImageBtn.addEventListener('click', function() {
+                // Use html2canvas to capture the badge as an image
+                html2canvas(badgePreview, {
+                    scale: 3,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: null
+                }).then(canvas => {
+                    // Convert canvas to data URL
+                    const imgData = canvas.toDataURL('image/png');
+                    
+                    // Create a temporary link to download the image
+                    const link = document.createElement('a');
+                    link.download = `badge-${badgeName.textContent.replace(' ', '-')}.png`;
+                    link.href = imgData;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Store the current badge image for sharing
+                    currentBadgeImage = imgData;
+                });
+            });
+            
+            // Handle social media sharing
+            shareInstagram.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentBadgeImage) {
+                    // For Instagram, we can't directly share, but we can guide the user
+                    alert("Pour partager sur Instagram:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez Instagram et créez un nouveau post\n3. Sélectionnez l'image téléchargée\n4. Ajoutez une légende et partagez!");
+                } else {
+                    alert("Veuillez d'abord générer votre badge pour le partager.");
+                }
+            });
+            
+            shareFacebook.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentBadgeImage) {
+                    // For Facebook, we can't directly share, but we can guide the user
+                    alert("Pour partager sur Facebook:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez Facebook et créez un nouveau post\n3. Sélectionnez l'image téléchargée\n4. Ajoutez une légende et partagez!");
+                } else {
+                    alert("Veuillez d'abord générer votre badge pour le partager.");
+                }
+            });
+            
+            shareTwitter.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentBadgeImage) {
+                    // For Twitter, we can't directly share, but we can guide the user
+                    alert("Pour partager sur Twitter:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez Twitter et créez un nouveau tweet\n3. Sélectionnez l'image téléchargée\n4. Ajoutez un texte et tweetez!");
+                } else {
+                    alert("Veuillez d'abord générer votre badge pour le partager.");
+                }
+            });
+            
             // Navbar scroll effect
             const navbar = document.querySelector('.navbar');
             window.addEventListener('scroll', function() {
@@ -755,6 +1467,33 @@
                     navbar.classList.remove('scrolled');
                 }
             });
+            
+            // Animation on scroll for program cards
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.program-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state for animated elements
+            const animatedElements = document.querySelectorAll('.program-card');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            // Trigger once on load
+            animateOnScroll();
         });
     </script>
 </body>
