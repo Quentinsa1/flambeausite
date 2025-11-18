@@ -8,24 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chargement des bibliothèques nécessaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         :root {
-            --primary-color: #FF6B00;
-            --primary-dark: #E05A00;
-            --primary-light: #FF8C3A;
-            --secondary-color: #FFD166;
+            --primary-color: #E67E22;
+            --primary-dark: #D35400;
+            --primary-light: #F39C12;
+            --secondary-color: #F1C40F;
             --dark-color: #1A1A2E;
             --dark-light: #2D2D44;
             --light-color: #F8F9FA;
-            --accent-color: #6A0DAD;
-            --accent-light: #8A3BD8;
+            --accent-color: #6C5CE7;
+            --accent-light: #8A7CFF;
             --success-color: #2ECC71;
             --gold-color: #D4AF37;
             --spiritual-blue: #4A6FA5;
             --spiritual-purple: #6B4E71;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #FDFDFD;
+            --bg-dark: #0F0F1B;
         }
         
         * {
@@ -35,11 +41,11 @@
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
-            background-color: var(--light-color);
+            background-color: var(--bg-light);
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -48,28 +54,29 @@
         }
         
         .spiritual-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
         }
         
+        /* Navigation */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.98);
+            background-color: rgba(253, 253, 253, 0.95);
             backdrop-filter: blur(15px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
             transition: all 0.4s ease;
-            padding: 15px 0;
+            padding: 20px 0;
         }
         
         .navbar.scrolled {
-            padding: 12px 0;
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 15px 0;
+            background-color: rgba(253, 253, 253, 0.98);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
         }
         
         .navbar-brand {
             font-weight: 900;
             color: var(--primary-color);
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
@@ -77,13 +84,13 @@
         
         .navbar-brand i {
             margin-right: 10px;
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .nav-link {
             font-weight: 500;
-            color: var(--dark-color);
-            margin: 0 10px;
+            color: var(--text-dark);
+            margin: 0 8px;
             transition: all 0.3s;
             position: relative;
             padding: 8px 16px !important;
@@ -92,7 +99,6 @@
         
         .nav-link:hover {
             color: var(--primary-color);
-            background-color: rgba(255, 107, 0, 0.08);
         }
         
         .nav-link.active {
@@ -106,52 +112,53 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 25px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            width: 20px;
+            height: 2px;
+            background: var(--primary-color);
             border-radius: 10px;
         }
         
+        /* Hero Section */
         .event-hero {
-            height: 85vh;
+            height: 90vh;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--dark-color) 0%, #2D2D44 100%);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--dark-color) 100%);
             color: white;
             text-align: center;
         }
         
-        .hero-particles {
+        .hero-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(230, 126, 34, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(108, 92, 231, 0.1) 0%, transparent 20%);
             z-index: 1;
         }
         
-        .particle {
+        .hero-pattern {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(0) rotate(360deg);
-                opacity: 0.5;
-            }
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(30deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
+                linear-gradient(150deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
+                linear-gradient(30deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
+                linear-gradient(150deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
+                linear-gradient(60deg, rgba(255,255,255,0.08) 25%, transparent 25.5%, transparent 75%, rgba(255,255,255,0.08) 75%, rgba(255,255,255,0.08)),
+                linear-gradient(60deg, rgba(255,255,255,0.08) 25%, transparent 25.5%, transparent 75%, rgba(255,255,255,0.08) 75%, rgba(255,255,255,0.08));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            opacity: 0.3;
+            z-index: 1;
         }
         
         .event-hero-content {
@@ -162,45 +169,45 @@
         }
         
         .event-title {
-            font-size: 4rem;
-            font-weight: 900;
+            font-size: 4.5rem;
+            font-weight: 300;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
             line-height: 1.1;
-            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            letter-spacing: -0.5px;
         }
         
         .event-subtitle {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 35px;
-            opacity: 0.9;
+            opacity: 0.8;
             font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .event-date {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 40px;
             color: var(--secondary-color);
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .btn-badge {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border: none;
-            padding: 18px 50px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            padding: 16px 45px;
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: 0;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: white;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            letter-spacing: 1px;
         }
         
         .btn-badge:before {
@@ -210,14 +217,13 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            background: var(--primary-color);
             transition: all 0.4s ease;
             z-index: -1;
         }
         
         .btn-badge:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.4);
+            transform: translateY(-5px);
             color: white;
         }
         
@@ -225,13 +231,15 @@
             width: 100%;
         }
         
+        /* Section Styles */
         .section-title {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--dark-color);
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: var(--text-dark);
             margin-bottom: 50px;
             text-align: center;
             position: relative;
+            letter-spacing: -0.5px;
         }
         
         .section-title:after {
@@ -240,18 +248,19 @@
             bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
             border-radius: 10px;
         }
         
         .section-subtitle {
-            font-size: 1.3rem;
-            color: #666;
+            font-size: 1.2rem;
+            color: var(--text-light);
             text-align: center;
             max-width: 700px;
             margin: 0 auto 50px;
+            font-weight: 400;
         }
         
         .program-section, .badge-section {
@@ -259,39 +268,15 @@
         }
         
         .program-section {
-            background-color: white;
+            background-color: var(--bg-light);
             position: relative;
             overflow: hidden;
         }
         
-        .program-section:before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            border-radius: 50%;
-            opacity: 0.05;
-        }
-        
-        .program-section:after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
-            border-radius: 50%;
-            opacity: 0.05;
-        }
-        
+        /* Program Cards */
         .program-card {
-            border-radius: 20px;
+            border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
             margin-bottom: 30px;
             height: 100%;
@@ -299,21 +284,14 @@
             border: none;
             position: relative;
             z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid transparent;
         }
         
         .program-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .program-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary-color);
         }
         
         .program-card-content {
@@ -324,195 +302,189 @@
         }
         
         .program-card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 2rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
             margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.2);
+            border: 1px solid var(--primary-color);
         }
         
         .program-card-title {
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.4rem;
+            font-weight: 600;
             margin-bottom: 20px;
-            color: var(--dark-color);
+            color: var(--text-dark);
         }
         
+        /* Badge Section */
         .badge-section {
-            background-color: var(--light-color);
+            background-color: var(--bg-light);
             position: relative;
             overflow: hidden;
         }
         
-        .badge-section:before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
-            border-radius: 50%;
-            opacity: 0.05;
-        }
-        
         .badge-form-container {
             background-color: white;
-            border-radius: 20px;
+            border-radius: 0;
             padding: 50px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
             margin-bottom: 50px;
             position: relative;
             z-index: 1;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .form-control {
             padding: 15px 20px;
-            border-radius: 12px;
+            border-radius: 0;
             margin-bottom: 25px;
             border: 1px solid #e0e0e0;
             transition: all 0.3s;
             font-size: 1rem;
+            background-color: var(--bg-light);
         }
         
         .form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+            box-shadow: none;
+            background-color: white;
         }
         
         .form-label {
             font-weight: 600;
             margin-bottom: 10px;
-            color: var(--dark-color);
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
         
         .badge-preview-container {
             background-color: white;
-            border-radius: 20px;
+            border-radius: 0;
             padding: 50px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
             display: none;
             position: relative;
             z-index: 1;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
-        /* NOUVEAU STYLE DU BADGE */
+
+        /* Badge Design */
         .badge-preview {
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
+            aspect-ratio: 3/4;
             margin: 0 auto;
-            border-radius: 25px;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a2a6c, #2d2d44, #1a1a2e);
-            color: white;
+            background: white;
+            color: var(--text-dark);
             text-align: center;
-            padding: 40px 30px;
+            padding: 40px;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: 'Playfair Display', serif;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
-        .badge-preview:before {
+        .badge-preview::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(106, 13, 173, 0.15) 0%, transparent 50%);
+            background: 
+                linear-gradient(135deg, rgba(230, 126, 34, 0.03) 0%, transparent 50%),
+                linear-gradient(225deg, rgba(108, 92, 231, 0.03) 0%, transparent 50%);
             z-index: 1;
         }
         
-        .badge-glow {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
-            animation: glowRotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        @keyframes glowRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         .badge-header {
-            margin-bottom: 30px;
+            text-align: center;
             position: relative;
             z-index: 2;
+            margin-bottom: 20px;
         }
         
         .badge-logo {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--gold-color);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--primary-color);
             margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-family: 'Cormorant Garamond', serif;
         }
         
         .badge-event-title {
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 2.2rem;
+            font-weight: 300;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #FFFFFF 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.3;
+            color: var(--text-dark);
+            line-height: 1.2;
+            font-family: 'Cormorant Garamond', serif;
         }
         
         .badge-event-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            margin-bottom: 15px;
             font-weight: 400;
             font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .badge-event-date {
             font-size: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.7;
             margin-bottom: 30px;
             font-weight: 500;
-            color: var(--gold-color);
+            color: var(--text-light);
+        }
+        
+        .badge-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            justify-content: center;
         }
         
         .badge-divider {
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
-            margin: 20px auto;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: 30px auto;
             position: relative;
             z-index: 2;
         }
         
         .badge-photo-container {
             position: relative;
-            display: inline-block;
-            margin-bottom: 25px;
-            z-index: 2;
+            margin-bottom: 30px;
         }
         
         .badge-photo-frame {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(135deg, var(--gold-color), var(--primary-color));
+            padding: 4px;
+            background: white;
             position: relative;
             margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .badge-photo {
@@ -520,82 +492,114 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--dark-color);
         }
         
         .badge-photo-placeholder {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--dark-color), var(--spiritual-blue));
+            background: linear-gradient(135deg, var(--bg-light), #e0e0e0);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gold-color);
-            font-size: 3.5rem;
-            border: 3px solid var(--dark-color);
+            color: var(--text-light);
+            font-size: 3rem;
         }
         
         .badge-name {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 15px;
             position: relative;
             z-index: 2;
-            color: white;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            color: var(--text-dark);
+            font-family: 'Cormorant Garamond', serif;
         }
         
         .badge-phone {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .badge-footer {
-            margin-top: 30px;
-            font-size: 1rem;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            opacity: 0.7;
             position: relative;
             z-index: 2;
             font-weight: 500;
-            font-style: italic;
-            color: var(--gold-color);
         }
         
-        .badge-qr {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-color);
-            font-size: 2rem;
-            z-index: 2;
+        .badge-confirmation {
+            text-align: center;
+            margin-bottom: 30px;
         }
         
-        .btn-download {
-            background: linear-gradient(135deg, var(--success-color) 0%, #27ae60 100%);
-            border: none;
-            padding: 15px 40px;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
-            color: white;
-            margin-top: 30px;
+        .confirmation-text {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            letter-spacing: 3px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .edition {
             font-size: 1.1rem;
+            opacity: 0.7;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        
+        .badge-footer {
+            background: var(--bg-light);
+            border-radius: 0;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .dress-code {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .location {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+        
+        .contact {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+        
+        .organizer-contact {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        /* Button Styles */
+        .btn-download {
+            background: transparent;
+            border: 2px solid var(--success-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.4s ease;
+            color: var(--success-color);
+            margin-top: 30px;
+            font-size: 1rem;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            letter-spacing: 0.5px;
         }
         
         .btn-download:before {
@@ -605,14 +609,13 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            background: var(--success-color);
             transition: all 0.4s ease;
             z-index: -1;
         }
         
         .btn-download:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
             color: white;
         }
         
@@ -620,20 +623,57 @@
             width: 100%;
         }
         
-        .btn-social {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border: none;
-            padding: 15px 40px;
+        .btn-email {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            padding: 12px 30px;
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: 0;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
-            color: white;
+            color: var(--accent-color);
             margin-top: 15px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-email:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--accent-color);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn-email:hover {
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        .btn-email:hover:before {
+            width: 100%;
+        }
+        
+        .btn-social {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.4s ease;
+            color: var(--primary-color);
+            margin-top: 15px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 0.5px;
         }
         
         .btn-social:before {
@@ -643,14 +683,13 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            background: var(--primary-color);
             transition: all 0.4s ease;
             z-index: -1;
         }
         
         .btn-social:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.4);
             color: white;
         }
         
@@ -666,6 +705,7 @@
             margin-top: 30px;
         }
         
+        /* Social Share */
         .social-share {
             margin-top: 40px;
             text-align: center;
@@ -673,8 +713,8 @@
         
         .social-share h4 {
             margin-bottom: 20px;
-            color: var(--dark-color);
-            font-weight: 700;
+            color: var(--text-dark);
+            font-weight: 600;
         }
         
         .social-icons {
@@ -684,14 +724,14 @@
         }
         
         .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -710,11 +750,12 @@
         
         .social-icon:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         
+        /* Footer */
         .footer {
-            background-color: #151521;
+            background-color: var(--bg-dark);
             color: white;
             padding: 80px 0 30px;
             position: relative;
@@ -727,12 +768,12 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            height: 3px;
+            background: var(--primary-color);
         }
         
         .footer-logo {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: var(--primary-color);
             margin-bottom: 25px;
@@ -743,14 +784,14 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            border-radius: 50%;
+            border-radius: 0;
             margin-right: 12px;
             transition: all 0.3s;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .social-links a:hover {
@@ -761,8 +802,8 @@
         .footer-links h5 {
             color: white;
             margin-bottom: 25px;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
         
         .footer-links ul {
@@ -778,11 +819,12 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .footer-links a:hover {
             color: var(--primary-color);
-            padding-left: 8px;
+            padding-left: 5px;
         }
         
         .footer-bottom {
@@ -791,34 +833,89 @@
             margin-top: 60px;
             text-align: center;
             color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.1rem;
         }
         
         /* Responsive Design */
         @media (max-width: 1200px) {
             .event-title {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
             
             .section-title {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+            }
+            
+            .badge-preview {
+                padding: 35px;
+            }
+            
+            .badge-logo {
+                font-size: 2.2rem;
+            }
+            
+            .badge-event-title {
+                font-size: 2rem;
+            }
+            
+            .badge-event-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .confirmation-text {
+                font-size: 2.2rem;
             }
         }
         
         @media (max-width: 992px) {
             .event-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .event-subtitle {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
             }
             
             .event-date {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .section-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .program-section, .badge-section {
@@ -835,78 +932,42 @@
             }
             
             .badge-preview {
-                max-width: 400px;
+                padding: 30px;
+            }
+            
+            .badge-logo {
+                font-size: 2rem;
+            }
+            
+            .badge-event-title {
+                font-size: 1.8rem;
+            }
+            
+            .badge-event-subtitle {
+                font-size: 1rem;
+            }
+            
+            .badge-event-date {
+                font-size: 1.1rem;
+            }
+            
+            .confirmation-text {
+                font-size: 2rem;
+            }
+            
+            .badge-photo-frame {
+                width: 160px;
+                height: 160px;
             }
         }
         
         @media (max-width: 768px) {
             .event-hero {
-                height: 80vh;
+                height: 85vh;
             }
             
             .event-title {
-                font-size: 2.5rem;
-            }
-            
-            .event-subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .event-date {
-                font-size: 1.6rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .program-section, .badge-section {
-                padding: 80px 0;
-            }
-            
-            .badge-form-container, .badge-preview-container {
-                padding: 30px;
-            }
-            
-            .btn-badge {
-                padding: 16px 40px;
-                font-size: 1.2rem;
-            }
-            
-            .badge-preview {
-                padding: 30px 20px;
-                max-width: 350px;
-            }
-            
-            .badge-logo {
-                font-size: 2.5rem;
-            }
-            
-            .badge-event-title {
-                font-size: 1.5rem;
-            }
-            
-            .badge-name {
-                font-size: 1.8rem;
-            }
-            
-            .badge-photo-frame {
-                width: 120px;
-                height: 120px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .event-hero {
-                height: 75vh;
-            }
-            
-            .event-title {
-                font-size: 2.2rem;
+                font-size: 3rem;
             }
             
             .event-subtitle {
@@ -921,9 +982,98 @@
                 font-size: 2rem;
             }
             
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .program-section, .badge-section {
+                padding: 80px 0;
+            }
+            
+            .badge-form-container, .badge-preview-container {
+                padding: 30px;
+            }
+            
             .btn-badge {
                 padding: 14px 35px;
+                font-size: 1rem;
+            }
+            
+            .badge-preview {
+                padding: 25px;
+            }
+            
+            .badge-logo {
+                font-size: 1.8rem;
+            }
+            
+            .badge-event-title {
+                font-size: 1.6rem;
+            }
+            
+            .badge-event-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .badge-event-date {
+                font-size: 1rem;
+            }
+            
+            .confirmation-text {
+                font-size: 1.8rem;
+            }
+            
+            .edition {
+                font-size: 1rem;
+            }
+            
+            .badge-photo-frame {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .badge-photo-placeholder {
+                font-size: 2.5rem;
+            }
+            
+            .dress-code {
                 font-size: 1.1rem;
+            }
+            
+            .location, .contact {
+                font-size: 0.9rem;
+            }
+            
+            .btn-download, .btn-social, .btn-email {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .event-hero {
+                height: 80vh;
+            }
+            
+            .event-title {
+                font-size: 2.5rem;
+            }
+            
+            .event-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .event-date {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn-badge {
+                padding: 12px 30px;
+                font-size: 0.9rem;
             }
             
             .program-card-content {
@@ -935,59 +1085,58 @@
             }
             
             .badge-preview {
-                padding: 25px 15px;
-                max-width: 300px;
-            }
-            
-            .badge-logo {
-                font-size: 2.2rem;
-            }
-            
-            .badge-event-title {
-                font-size: 1.3rem;
-            }
-            
-            .badge-name {
-                font-size: 1.6rem;
-            }
-            
-            .badge-photo-frame {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .badge-qr {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            .event-title {
-                font-size: 1.9rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .badge-form-container, .badge-preview-container {
                 padding: 20px;
             }
             
-            .download-options {
-                gap: 10px;
+            .badge-logo {
+                font-size: 1.6rem;
             }
             
-            .btn-download, .btn-social {
-                padding: 12px 30px;
-                font-size: 1rem;
+            .badge-event-title {
+                font-size: 1.4rem;
+            }
+            
+            .badge-event-subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .badge-event-date {
+                font-size: 0.9rem;
+            }
+            
+            .confirmation-text {
+                font-size: 1.6rem;
+            }
+            
+            .edition {
+                font-size: 0.9rem;
+            }
+            
+            .badge-photo-frame {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .badge-photo-placeholder {
+                font-size: 2rem;
+            }
+            
+            .btn-download, .btn-social, .btn-email {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="text-center">
+            <div class="spinner"></div>
+            <div class="loading-text">Envoi du badge en cours...</div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
@@ -1016,7 +1165,8 @@
 
     <!-- Event Hero Section -->
     <section class="event-hero" id="evenement">
-        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-background"></div>
+        <div class="hero-pattern"></div>
         <div class="container">
             <div class="event-hero-content">
                 <h1 class="event-title spiritual-title">Reconnecter à la Source</h1>
@@ -1157,6 +1307,10 @@
                         <input type="tel" class="form-control" id="phone" required>
                     </div>
                     <div class="mb-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-4">
                         <label for="photo" class="form-label">Photo (optionnelle)</label>
                         <input type="file" class="form-control" id="photo" accept="image/*">
                         <div class="form-text">Formats acceptés: JPG, PNG. Taille maximale: 2MB.</div>
@@ -1171,37 +1325,40 @@
             <div class="badge-preview-container" id="badgePreviewContainer">
                 <h3 class="text-center mb-4">Votre badge "J'y serai"</h3>
                 <div class="badge-preview" id="badgePreview">
-                    <div class="badge-glow"></div>
-                    
                     <div class="badge-header">
                         <div class="badge-logo">FLAMBEAU</div>
-                        <div class="badge-event-title spiritual-title">Reconnecter à la Source</div>
+                        <div class="badge-event-title">Reconnecter à la Source</div>
                         <div class="badge-event-subtitle">Libérer son don pour réussir dans tous les domaines de la vie</div>
                         <div class="badge-event-date">Samedi 29 Novembre 2025 | 18h00 - 21h30</div>
                     </div>
                     
-                    <div class="badge-divider"></div>
-                    
-                    <div class="badge-photo-container">
-                        <div class="badge-photo-frame">
-                            <img id="badgePhoto" src="" alt="Photo" class="badge-photo" style="display: none;">
-                            <div class="badge-photo-placeholder" id="badgePhotoPlaceholder" style="display: flex;">
-                                <i class="fas fa-user"></i>
+                    <div class="badge-content">
+                        <div class="badge-divider"></div>
+                        
+                        <div class="badge-photo-container">
+                            <div class="badge-photo-frame">
+                                <img id="badgePhoto" src="" alt="Photo" class="badge-photo" style="display: none;">
+                                <div class="badge-photo-placeholder" id="badgePhotoPlaceholder" style="display: flex;">
+                                    <i class="fas fa-user"></i>
+                                </div>
                             </div>
                         </div>
+                        
+                        <div class="badge-name spiritual-title" id="badgeName">Nom Prénom</div>
+                        <div class="badge-phone" id="badgePhone">Téléphone: </div>
+                        
+                        <div class="badge-confirmation">
+                            <div class="confirmation-text">J'Y SERAI</div>
+                            <div class="edition"> Nous contacter: 0161924532/ 0196226313</div>
+                        </div>
+                        
+                        <div class="badge-divider"></div>
                     </div>
                     
-                    <div class="badge-name spiritual-title" id="badgeName">Nom Prénom</div>
-                    <div class="badge-phone">Téléphone Organisateur: +2290166395379 / +22901 000000000</div>
-
-                    <div class="badge-phone">Téléphone particpant:</div>                    
-                    <div class="badge-phone" id="badgePhone">Téléphone particpant</div>                    
-                    <div class="badge-divider"></div>
-                    
-                    <div class="badge-footer">Je m'engage à participer à cet événement. J'y serai</div>
-                    
-                    <div class="badge-qr">
-                        <i class="fas fa-qrcode"></i>
+                    <div class="badge-footer">
+                        <div class="dress-code">Code vestimentaire: Élégant</div>
+                        <div class="location">Lieu: Commune d'Abomey Calavi</div>
+                        <div class="contact">Email: contact@flambeau.org</div>
                     </div>
                 </div>
                 
@@ -1209,13 +1366,16 @@
                     <button class="btn btn-download" id="downloadPdfBtn">
                         <i class="fas fa-file-pdf me-2"></i>Télécharger en PDF
                     </button>
+                    <button class="btn btn-email" id="sendEmailBtn">
+                        <i class="fas fa-envelope me-2"></i>Envoyer par Email
+                    </button>
                     <button class="btn btn-social" id="downloadImageBtn">
                         <i class="fas fa-image me-2"></i>Télécharger en Image
                     </button>
                 </div>
                 
                 <div class="social-share">
-                    <h4>Partagez sur les réseaux sociaux</h4>
+                    <h4>Partager sur les réseaux</h4>
                     <div class="social-icons">
                         <a href="#" class="social-icon instagram" id="shareInstagram">
                             <i class="fab fa-instagram"></i>
@@ -1273,7 +1433,7 @@
                     <div class="footer-links">
                         <h5>Contact</h5>
                         <p>Email: contact@flambeau.org</p>
-                        <p>Téléphone: 01 61 92 45 32</p>
+                        <p>Téléphone: +229 016 19 24 532 / +229 019 62 26 313</p>
                         <p>Adresse: Commune d'Abomey Calavi</p>
                     </div>
                 </div>
@@ -1284,215 +1444,304 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Initialisation EmailJS - À remplacer avec vos clés
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+
         document.addEventListener('DOMContentLoaded', function() {
-            const badgeForm = document.getElementById('badgeForm');
-            const badgeFormContainer = document.getElementById('badgeFormContainer');
-            const badgePreviewContainer = document.getElementById('badgePreviewContainer');
-            const badgePreview = document.getElementById('badgePreview');
-            const badgeName = document.getElementById('badgeName');
-            const badgePhone = document.getElementById('badgePhone');
-            const badgePhoto = document.getElementById('badgePhoto');
-            const badgePhotoPlaceholder = document.getElementById('badgePhotoPlaceholder');
-            const generateBadgeBtn = document.getElementById('generateBadgeBtn');
-            const downloadPdfBtn = document.getElementById('downloadPdfBtn');
-            const downloadImageBtn = document.getElementById('downloadImageBtn');
-            const shareInstagram = document.getElementById('shareInstagram');
-            const shareFacebook = document.getElementById('shareFacebook');
-            const shareTwitter = document.getElementById('shareTwitter');
-            const heroParticles = document.getElementById('heroParticles');
-            
+            // Variables globales
+            const DOM = {
+                badgeForm: document.getElementById('badgeForm'),
+                badgeFormContainer: document.getElementById('badgeFormContainer'),
+                badgePreviewContainer: document.getElementById('badgePreviewContainer'),
+                badgePreview: document.getElementById('badgePreview'),
+                badgeName: document.getElementById('badgeName'),
+                badgePhone: document.getElementById('badgePhone'),
+                badgePhoto: document.getElementById('badgePhoto'),
+                badgePhotoPlaceholder: document.getElementById('badgePhotoPlaceholder'),
+                generateBadgeBtn: document.getElementById('generateBadgeBtn'),
+                downloadPdfBtn: document.getElementById('downloadPdfBtn'),
+                downloadImageBtn: document.getElementById('downloadImageBtn'),
+                sendEmailBtn: document.getElementById('sendEmailBtn'),
+                shareInstagram: document.getElementById('shareInstagram'),
+                shareFacebook: document.getElementById('shareFacebook'),
+                shareTwitter: document.getElementById('shareTwitter'),
+                loadingOverlay: document.getElementById('loadingOverlay'),
+                navbar: document.querySelector('.navbar')
+            };
+
             let currentBadgeImage = null;
-            
-            // Create floating particles in hero section
-            function createParticles() {
-                const particlesCount = 15;
-                for (let i = 0; i < particlesCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    
-                    const size = Math.random() * 60 + 20;
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    const delay = Math.random() * 15;
-                    
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.top = `${posY}%`;
-                    particle.style.left = `${posX}%`;
-                    particle.style.animationDelay = `${delay}s`;
-                    
-                    heroParticles.appendChild(particle);
-                }
-            }
-            
-            createParticles();
-            
-            // Scroll to badge section when "Générer mon badge" is clicked
-            generateBadgeBtn.addEventListener('click', function() {
+            let currentParticipantData = {};
+
+            // Fonction utilitaire pour valider les emails
+            const validateEmail = (email) => {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            };
+
+            // Fonction utilitaire pour valider les numéros de téléphone
+            const validatePhone = (phone) => {
+                const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+                return re.test(phone);
+            };
+
+            // Scroll vers la section badge
+            DOM.generateBadgeBtn.addEventListener('click', function() {
                 document.getElementById('badge').scrollIntoView({ behavior: 'smooth' });
             });
-            
-            // Handle form submission
-            badgeForm.addEventListener('submit', function(e) {
+
+            // Gestion de la soumission du formulaire
+            DOM.badgeForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Get form values
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const phone = document.getElementById('phone').value;
+                // Récupération des valeurs du formulaire
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
                 const photoFile = document.getElementById('photo').files[0];
-                
-                // Update badge preview
-                badgeName.textContent = `${firstName} ${lastName}`;
-                badgePhone.textContent = phone;
-                
-                // Handle photo if provided
+
+                // Validation des champs
+                if (!firstName || !lastName) {
+                    alert('Veuillez saisir votre nom complet.');
+                    return;
+                }
+
+                if (!validatePhone(phone)) {
+                    alert('Veuillez saisir un numéro de téléphone valide.');
+                    return;
+                }
+
+                if (!validateEmail(email)) {
+                    alert('Veuillez saisir une adresse email valide.');
+                    return;
+                }
+
+                // Stockage des données du participant
+                currentParticipantData = { firstName, lastName, phone, email };
+
+                // Mise à jour de l'aperçu du badge
+                DOM.badgeName.textContent = `${firstName} ${lastName}`;
+                DOM.badgePhone.textContent = `Téléphone: ${phone}`;
+
+                // Gestion de la photo si fournie
                 if (photoFile) {
+                    // Validation de la taille du fichier (max 2MB)
+                    if (photoFile.size > 2 * 1024 * 1024) {
+                        alert('La photo ne doit pas dépasser 2MB.');
+                        return;
+                    }
+
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        badgePhoto.src = e.target.result;
-                        badgePhoto.style.display = 'block';
-                        badgePhotoPlaceholder.style.display = 'none';
+                        DOM.badgePhoto.src = e.target.result;
+                        DOM.badgePhoto.style.display = 'block';
+                        DOM.badgePhotoPlaceholder.style.display = 'none';
                     };
                     reader.readAsDataURL(photoFile);
                 } else {
-                    badgePhoto.style.display = 'none';
-                    badgePhotoPlaceholder.style.display = 'flex';
+                    DOM.badgePhoto.style.display = 'none';
+                    DOM.badgePhotoPlaceholder.style.display = 'flex';
                 }
-                
-                // Show badge preview and hide form
-                badgeFormContainer.style.display = 'none';
-                badgePreviewContainer.style.display = 'block';
-                
-                // Scroll to badge preview
-                badgePreviewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Affichage de l'aperçu et masquage du formulaire
+                DOM.badgeFormContainer.style.display = 'none';
+                DOM.badgePreviewContainer.style.display = 'block';
+
+                // Scroll vers l'aperçu du badge
+                DOM.badgePreviewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-            
-            // Handle PDF download
-            downloadPdfBtn.addEventListener('click', function() {
-                // Use html2canvas to capture the badge as an image
-                html2canvas(badgePreview, {
+
+            // Téléchargement du badge en PDF
+            DOM.downloadPdfBtn.addEventListener('click', function() {
+                // Vérification que les scripts sont chargés
+                if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
+                    alert('Erreur: Les bibliothèques nécessaires ne sont pas chargées.');
+                    return;
+                }
+
+                html2canvas(DOM.badgePreview, {
                     scale: 3,
                     useCORS: true,
                     logging: false,
                     backgroundColor: null
                 }).then(canvas => {
-                    // Convert canvas to image data
                     const imgData = canvas.toDataURL('image/png');
-                    
-                    // Create PDF
                     const { jsPDF } = window.jspdf;
                     const pdf = new jsPDF({
                         orientation: 'portrait',
                         unit: 'mm',
-                        format: [100, 150] // Custom size for badge
+                        format: [100, 133]
                     });
-                    
-                    // Calculate dimensions to fit the badge in the PDF
+
                     const pdfWidth = pdf.internal.pageSize.getWidth();
                     const pdfHeight = pdf.internal.pageSize.getHeight();
-                    
-                    // Add image to PDF
+
                     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                    
-                    // Download the PDF
-                    pdf.save(`badge-${badgeName.textContent.replace(' ', '-')}.pdf`);
+                    pdf.save(`badge-${DOM.badgeName.textContent.replace(' ', '-')}.pdf`);
+
+                    currentBadgeImage = imgData;
+                }).catch(error => {
+                    console.error('Erreur lors de la génération du PDF:', error);
+                    alert('Une erreur est survenue lors de la génération du PDF.');
                 });
             });
-            
-            // Handle image download
-            downloadImageBtn.addEventListener('click', function() {
-                // Use html2canvas to capture the badge as an image
-                html2canvas(badgePreview, {
+
+            // Téléchargement du badge en image
+            DOM.downloadImageBtn.addEventListener('click', function() {
+                if (typeof html2canvas === 'undefined') {
+                    alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
+                    return;
+                }
+
+                html2canvas(DOM.badgePreview, {
                     scale: 3,
                     useCORS: true,
                     logging: false,
                     backgroundColor: null
                 }).then(canvas => {
-                    // Convert canvas to data URL
                     const imgData = canvas.toDataURL('image/png');
-                    
-                    // Create a temporary link to download the image
                     const link = document.createElement('a');
-                    link.download = `badge-${badgeName.textContent.replace(' ', '-')}.png`;
+                    link.download = `badge-${DOM.badgeName.textContent.replace(' ', '-')}.png`;
                     link.href = imgData;
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    
-                    // Store the current badge image for sharing
+
                     currentBadgeImage = imgData;
+                }).catch(error => {
+                    console.error('Erreur lors de la génération de l\'image:', error);
+                    alert('Une erreur est survenue lors de la génération de l\'image.');
                 });
             });
-            
-            // Handle social media sharing
-            shareInstagram.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (currentBadgeImage) {
-                    // For Instagram, we can't directly share, but we can guide the user
-                    alert("Pour partager sur Instagram:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez Instagram et créez un nouveau post\n3. Sélectionnez l'image téléchargée\n4. Ajoutez une légende et partagez!");
+
+            // Envoi du badge par email
+            DOM.sendEmailBtn.addEventListener('click', function() {
+                if (!currentBadgeImage) {
+                    if (typeof html2canvas === 'undefined') {
+                        alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
+                        return;
+                    }
+
+                    html2canvas(DOM.badgePreview, {
+                        scale: 3,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: null
+                    }).then(canvas => {
+                        currentBadgeImage = canvas.toDataURL('image/png');
+                        sendBadgeByEmail();
+                    }).catch(error => {
+                        console.error('Erreur lors de la génération de l\'image:', error);
+                        alert('Une erreur est survenue lors de la génération de l\'image.');
+                    });
                 } else {
-                    alert("Veuillez d'abord générer votre badge pour le partager.");
+                    sendBadgeByEmail();
                 }
             });
-            
-            shareFacebook.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (currentBadgeImage) {
-                    // For Facebook, we can't directly share, but we can guide the user
-                    alert("Pour partager sur Facebook:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez Facebook et créez un nouveau post\n3. Sélectionnez l'image téléchargée\n4. Ajoutez une légende et partagez!");
+
+            // Fonction d'envoi d'email
+            function sendBadgeByEmail() {
+                DOM.loadingOverlay.style.display = 'flex';
+
+                const templateParams = {
+                    to_name: 'Quentin',
+                    from_name: `${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+                    from_email: currentParticipantData.email,
+                    participant_name: `${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+                    participant_phone: currentParticipantData.phone,
+                    participant_email: currentParticipantData.email,
+                    message: `Nouveau badge généré pour ${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+                    badge_image: currentBadgeImage
+                };
+
+                // Envoi via EmailJS
+                if (typeof emailjs !== 'undefined') {
+                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                        .then(function(response) {
+                            DOM.loadingOverlay.style.display = 'none';
+                            alert('Badge envoyé avec succès à quentinsacla@gmail.com !');
+                        }, function(error) {
+                            console.error('Erreur EmailJS:', error);
+                            DOM.loadingOverlay.style.display = 'none';
+                            fallbackEmail();
+                        });
                 } else {
-                    alert("Veuillez d'abord générer votre badge pour le partager.");
+                    DOM.loadingOverlay.style.display = 'none';
+                    fallbackEmail();
                 }
+            }
+
+            // Solution de secours pour l'envoi d'email
+            function fallbackEmail() {
+                const subject = `Badge FLAMBEAU - ${currentParticipantData.firstName} ${currentParticipantData.lastName}`;
+                const body = `Bonjour,\n\nVoici le badge de ${currentParticipantData.firstName} ${currentParticipantData.lastName} pour l'événement FLAMBEAU "Reconnecter à la Source".\n\nInformations du participant:\n- Nom: ${currentParticipantData.firstName} ${currentParticipantData.lastName}\n- Téléphone: ${currentParticipantData.phone}\n- Email: ${currentParticipantData.email}\n\nLe badge est en pièce jointe.\n\nCordialement,\nSystème de génération de badges FLAMBEAU`;
+
+                // Téléchargement de l'image d'abord
+                const link = document.createElement('a');
+                link.download = `badge-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
+                link.href = currentBadgeImage;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Ouverture du client email
+                setTimeout(() => {
+                    window.location.href = `mailto:quentinsacla@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                }, 1000);
+            }
+
+            // Partage sur les réseaux sociaux
+            [DOM.shareInstagram, DOM.shareFacebook, DOM.shareTwitter].forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (currentBadgeImage) {
+                        const platform = this.id.replace('share', '').toLowerCase();
+                        alert(`Pour partager sur ${platform}:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez ${platform} et créez un nouveau post\n3. Sélectionnez l'image téléchargée\n4. Ajoutez une légende et partagez!`);
+                    } else {
+                        alert("Veuillez d'abord générer votre badge pour le partager.");
+                    }
+                });
             });
-            
-            shareTwitter.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (currentBadgeImage) {
-                    // For Twitter, we can't directly share, but we can guide the user
-                    alert("Pour partager sur Twitter:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez Twitter et créez un nouveau tweet\n3. Sélectionnez l'image téléchargée\n4. Ajoutez un texte et tweetez!");
-                } else {
-                    alert("Veuillez d'abord générer votre badge pour le partager.");
-                }
-            });
-            
-            // Navbar scroll effect
-            const navbar = document.querySelector('.navbar');
+
+            // Effet de scroll sur la navbar
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 100) {
-                    navbar.classList.add('scrolled');
+                    DOM.navbar.classList.add('scrolled');
                 } else {
-                    navbar.classList.remove('scrolled');
+                    DOM.navbar.classList.remove('scrolled');
                 }
             });
-            
-            // Animation on scroll for program cards
+
+            // Animation au scroll pour les cartes de programme
             const animateOnScroll = function() {
                 const elements = document.querySelectorAll('.program-card');
-                
+                const screenPosition = window.innerHeight / 1.2;
+
                 elements.forEach(element => {
                     const elementPosition = element.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.2;
-                    
+
                     if (elementPosition < screenPosition) {
                         element.style.opacity = '1';
                         element.style.transform = 'translateY(0)';
                     }
                 });
             };
-            
-            // Set initial state for animated elements
+
+            // État initial pour les éléments animés
             const animatedElements = document.querySelectorAll('.program-card');
             animatedElements.forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(30px)';
                 element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             });
-            
+
             window.addEventListener('scroll', animateOnScroll);
-            // Trigger once on load
+            // Déclenchement initial au chargement
             animateOnScroll();
         });
     </script>
