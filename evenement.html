@@ -1125,7 +1125,218 @@
                 padding: 10px 20px;
                 font-size: 0.9rem;
             }
-        }
+        }@media (max-width: 768px) {
+    .badge-preview-container {
+        padding: 20px 15px;
+        margin: 0 -10px;
+        width: calc(100% + 20px);
+    }
+    
+    .badge-preview {
+        aspect-ratio: 2/3;
+        padding: 25px 20px;
+        max-width: 100%;
+        transform: scale(0.95);
+        transform-origin: center;
+    }
+    
+    .badge-logo {
+        font-size: 1.6rem !important;
+        margin-bottom: 10px;
+    }
+    
+    .badge-event-title {
+        font-size: 1.4rem !important;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+    
+    .badge-event-subtitle {
+        font-size: 0.9rem !important;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+    
+    .badge-event-date {
+        font-size: 0.9rem !important;
+        margin-bottom: 20px;
+    }
+    
+    .badge-photo-frame {
+        width: 120px !important;
+        height: 120px !important;
+        margin-bottom: 15px;
+    }
+    
+    .badge-photo-placeholder {
+        font-size: 2rem !important;
+    }
+    
+    .badge-name {
+        font-size: 1.4rem !important;
+        margin-bottom: 10px;
+    }
+    
+    .badge-phone {
+        font-size: 0.9rem !important;
+        margin-bottom: 10px;
+    }
+    
+    .confirmation-text {
+        font-size: 1.4rem !important;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+    }
+    
+    .edition {
+        font-size: 0.8rem !important;
+    }
+    
+    .badge-divider {
+        margin: 20px auto;
+        width: 80%;
+    }
+    
+    .dress-code {
+        font-size: 1rem !important;
+        margin-bottom: 10px;
+    }
+    
+    .location, .contact {
+        font-size: 0.8rem !important;
+        margin-bottom: 8px;
+    }
+    
+    .download-options {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .btn-download, .btn-email, .btn-social {
+        width: 100%;
+        margin-top: 0;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .badge-preview {
+        padding: 20px 15px;
+        transform: scale(0.9);
+    }
+    
+    .badge-logo {
+        font-size: 1.4rem !important;
+    }
+    
+    .badge-event-title {
+        font-size: 1.2rem !important;
+    }
+    
+    .badge-event-subtitle {
+        font-size: 0.8rem !important;
+    }
+    
+    .badge-photo-frame {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    
+    .badge-name {
+        font-size: 1.2rem !important;
+    }
+    
+    .confirmation-text {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .badge-preview {
+        transform: scale(0.85);
+        padding: 15px 10px;
+    }
+    
+    .badge-logo {
+        font-size: 1.2rem !important;
+    }
+    
+    .badge-event-title {
+        font-size: 1.1rem !important;
+    }
+}
+
+/* Amélioration du formulaire sur mobile */
+@media (max-width: 768px) {
+    .badge-form-container {
+        padding: 30px 20px;
+        margin: 0 -10px;
+        width: calc(100% + 20px);
+    }
+    
+    .form-control {
+        padding: 12px 15px;
+        font-size: 16px; /* Évite le zoom sur iOS */
+    }
+    
+    .btn-badge {
+        width: 100%;
+        padding: 14px 20px;
+    }
+}
+
+/* Correction pour l'orientation paysage sur mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .badge-section {
+        padding: 60px 0;
+    }
+    
+    .badge-preview {
+        max-height: 90vh;
+        aspect-ratio: 3/4;
+    }
+}
+
+/* Amélioration de la navigation sur mobile */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+    
+    .nav-link {
+        padding: 10px 15px !important;
+        text-align: center;
+    }
+}
+
+/* Optimisation du chargement des images */
+.badge-photo {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Assurer que le badge reste centré */
+.badge-preview-container .row {
+    justify-content: center;
+}
+
+/* Styles pour les très petits écrans */
+@media (max-width: 360px) {
+    .badge-preview {
+        transform: scale(0.8);
+    }
+    
+    .event-title {
+        font-size: 2rem;
+    }
+    
+    .event-subtitle {
+        font-size: 1rem;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -1744,6 +1955,63 @@
             // Déclenchement initial au chargement
             animateOnScroll();
         });
+    // Ajoutez cette fonction à votre code JavaScript existant
+function optimizeForMobile() {
+    const isMobile = window.innerWidth <= 768;
+    const badgePreview = document.getElementById('badgePreview');
+    
+    if (isMobile) {
+        // Optimisations spécifiques mobile
+        badgePreview.style.maxWidth = '100%';
+        badgePreview.style.margin = '0 auto';
+        
+        // Ajuster l'échelle pour les très petits écrans
+        if (window.innerWidth <= 400) {
+            badgePreview.style.transform = 'scale(0.9)';
+            badgePreview.style.transformOrigin = 'center top';
+        }
+    } else {
+        // Reset pour desktop
+        badgePreview.style.transform = 'none';
+    }
+}
+
+// Appeler la fonction au chargement et au redimensionnement
+window.addEventListener('load', optimizeForMobile);
+window.addEventListener('resize', optimizeForMobile);
+
+// Optimisation du téléchargement pour mobile
+DOM.downloadImageBtn.addEventListener('click', function() {
+    if (typeof html2canvas === 'undefined') {
+        alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
+        return;
+    }
+
+    // Ajuster l'échelle pour mobile
+    const scale = window.innerWidth <= 768 ? 2 : 3;
+
+    html2canvas(DOM.badgePreview, {
+        scale: scale,
+        useCORS: true,
+        logging: false,
+        backgroundColor: null,
+        width: DOM.badgePreview.offsetWidth,
+        height: DOM.badgePreview.offsetHeight
+    }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `badge-${DOM.badgeName.textContent.replace(' ', '-')}.png`;
+        link.href = imgData;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        currentBadgeImage = imgData;
+    }).catch(error => {
+        console.error('Erreur lors de la génération de l\'image:', error);
+        alert('Une erreur est survenue lors de la génération de l\'image.');
+    });
+});
     </script>
 </body>
 </html>
