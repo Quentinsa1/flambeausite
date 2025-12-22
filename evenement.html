@@ -3,35 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Événement FLAMBEAU - Reconnecter à la Source</title>
+    <title>FLAMBEAU - La Graine du Changement</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chargement des bibliothèques nécessaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         :root {
-            --primary-color: #E67E22;
-            --primary-dark: #D35400;
-            --primary-light: #F39C12;
-            --secondary-color: #F1C40F;
-            --dark-color: #1A1A2E;
-            --dark-light: #2D2D44;
-            --light-color: #F8F9FA;
-            --accent-color: #6C5CE7;
-            --accent-light: #8A7CFF;
-            --success-color: #2ECC71;
-            --gold-color: #D4AF37;
-            --spiritual-blue: #4A6FA5;
-            --spiritual-purple: #6B4E71;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
-            --bg-light: #FDFDFD;
-            --bg-dark: #0F0F1B;
+            --gold: #D4AF37;
+            --dark-gold: #B8860B;
+            --light-gold: #F5E8AA;
+            --deep-navy: #0A1931;
+            --navy: #1A2B4A;
+            --light-navy: #2C3E66;
+            --earth-brown: #8B4513;
+            --soil-brown: #A0522D;
+            --growth-green: #2E8B57;
+            --leaf-green: #3CB371;
+            --white: #FFFFFF;
+            --off-white: #F8F8F8;
+            --light-gray: #EAEAEA;
+            --shadow: rgba(10, 25, 49, 0.1);
         }
         
         * {
@@ -42,104 +39,98 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
+            color: var(--deep-navy);
+            background-color: var(--off-white);
             overflow-x: hidden;
             line-height: 1.6;
-            background-color: var(--bg-light);
         }
         
-        h1, h2, h3, h4, h5, h6 {
+        .elegant-title {
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
-            line-height: 1.3;
+            letter-spacing: 0.5px;
         }
         
-        .spiritual-title {
-            font-family: 'Cormorant Garamond', serif;
+        .luxury-title {
+            font-family: 'Cinzel', serif;
             font-weight: 600;
+            letter-spacing: 1px;
         }
         
-        /* Navigation */
+        /* Navigation Luxueuse */
         .navbar {
-            background-color: rgba(253, 253, 253, 0.95);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
+            background: rgba(10, 25, 49, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             padding: 20px 0;
+            transition: all 0.5s ease;
         }
         
         .navbar.scrolled {
             padding: 15px 0;
-            background-color: rgba(253, 253, 253, 0.98);
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            background: rgba(10, 25, 49, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
         }
         
         .navbar-brand {
-            font-weight: 900;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            position: relative;
         }
         
-        .navbar-brand i {
-            margin-right: 10px;
-            font-size: 1.8rem;
+        .navbar-brand:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
         
         .nav-link {
             font-weight: 500;
-            color: var(--text-dark);
-            margin: 0 8px;
-            transition: all 0.3s;
+            color: var(--white);
+            margin: 0 15px;
+            padding: 8px 20px !important;
             position: relative;
-            padding: 8px 16px !important;
-            border-radius: 8px;
+            transition: all 0.3s;
+            opacity: 0.9;
         }
         
-        .nav-link:hover {
-            color: var(--primary-color);
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold);
+            opacity: 1;
         }
         
-        .nav-link.active {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .nav-link.active:after {
+        .nav-link:after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
+            width: 0;
             height: 2px;
-            background: var(--primary-color);
-            border-radius: 10px;
+            background: var(--gold);
+            transition: width 0.3s ease;
         }
         
-        /* Hero Section */
-        .event-hero {
-            height: 90vh;
+        .nav-link:hover:after, .nav-link.active:after {
+            width: 30px;
+        }
+        
+        /* Hero Section Élégante */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--navy) 100%);
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--dark-color) 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(230, 126, 34, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(108, 92, 231, 0.1) 0%, transparent 20%);
-            z-index: 1;
+            padding: 100px 0;
         }
         
         .hero-pattern {
@@ -149,342 +140,421 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(30deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
-                linear-gradient(150deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
-                linear-gradient(30deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
-                linear-gradient(150deg, rgba(255,255,255,0.05) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.05) 87.5%, rgba(255,255,255,0.05)),
-                linear-gradient(60deg, rgba(255,255,255,0.08) 25%, transparent 25.5%, transparent 75%, rgba(255,255,255,0.08) 75%, rgba(255,255,255,0.08)),
-                linear-gradient(60deg, rgba(255,255,255,0.08) 25%, transparent 25.5%, transparent 75%, rgba(255,255,255,0.08) 75%, rgba(255,255,255,0.08));
-            background-size: 80px 140px;
-            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(46, 139, 87, 0.05) 0%, transparent 50%);
             opacity: 0.3;
-            z-index: 1;
         }
         
-        .event-hero-content {
+        .hero-content {
             position: relative;
             z-index: 2;
+            text-align: center;
             max-width: 900px;
-            padding: 0 20px;
+            margin: 0 auto;
         }
         
-        .event-title {
+        .hero-title {
             font-size: 4.5rem;
-            font-weight: 300;
+            color: var(--white);
             margin-bottom: 25px;
-            line-height: 1.1;
-            color: white;
-            letter-spacing: -0.5px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
         }
         
-        .event-subtitle {
+        .hero-subtitle {
             font-size: 1.5rem;
-            margin-bottom: 35px;
-            opacity: 0.8;
-            font-weight: 400;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .event-date {
-            font-size: 1.8rem;
+            color: var(--light-gold);
             margin-bottom: 40px;
-            color: var(--secondary-color);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-badge {
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            padding: 16px 45px;
-            font-weight: 600;
-            border-radius: 0;
-            transition: all 0.4s ease;
-            font-size: 1.1rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            font-weight: 300;
             letter-spacing: 1px;
         }
         
-        .btn-badge:before {
+        .event-date {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+        
+        .btn-elegant {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+        
+        .btn-elegant:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 0%;
             height: 100%;
-            background: var(--primary-color);
+            background: var(--gold);
             transition: all 0.4s ease;
             z-index: -1;
         }
         
-        .btn-badge:hover {
+        .btn-elegant:hover {
+            color: var(--deep-navy);
             transform: translateY(-5px);
-            color: white;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
         }
         
-        .btn-badge:hover:before {
+        .btn-elegant:hover:before {
             width: 100%;
         }
         
-        /* Section Styles */
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 300;
-            color: var(--text-dark);
-            margin-bottom: 50px;
-            text-align: center;
+        /* Section Programme */
+        .program-section {
+            padding: 120px 0;
+            background: var(--off-white);
             position: relative;
-            letter-spacing: -0.5px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
         }
         
         .section-title:after {
             content: '';
             position: absolute;
-            bottom: -20px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 100px;
             height: 3px;
-            background: var(--primary-color);
-            border-radius: 10px;
+            background: var(--gold);
         }
         
         .section-subtitle {
             font-size: 1.2rem;
-            color: var(--text-light);
-            text-align: center;
+            color: var(--light-navy);
             max-width: 700px;
-            margin: 0 auto 50px;
-            font-weight: 400;
+            margin: 0 auto;
+            font-weight: 300;
         }
         
-        .program-section, .badge-section {
-            padding: 120px 0;
-        }
-        
-        .program-section {
-            background-color: var(--bg-light);
+        /* Timeline Élégante */
+        .timeline-container {
             position: relative;
-            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
         }
         
-        /* Program Cards */
-        .program-card {
-            border-radius: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            margin-bottom: 30px;
-            height: 100%;
-            background-color: white;
-            border: none;
+        .timeline {
             position: relative;
-            z-index: 1;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-            border-left: 4px solid transparent;
         }
         
-        .program-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .program-card-content {
-            padding: 40px 30px;
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
             height: 100%;
+            background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+        }
+        
+        .timeline-item {
             display: flex;
-            flex-direction: column;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 80px;
+            width: 100%;
         }
         
-        .program-card-icon {
-            width: 60px;
-            height: 60px;
-            background: transparent;
-            border-radius: 0;
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-content {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px var(--shadow);
+            border-left: 4px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid var(--growth-green);
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: -70px;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--deep-navy);
+            border: 3px solid var(--gold);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            border: 1px solid var(--primary-color);
+            color: var(--gold);
+            font-size: 1.3rem;
+            z-index: 2;
         }
         
-        .program-card-title {
-            font-size: 1.4rem;
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: auto;
+            right: -70px;
+        }
+        
+        .timeline-time {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 30px;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-        
-        /* Badge Section */
-        .badge-section {
-            background-color: var(--bg-light);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .badge-form-container {
-            background-color: white;
-            border-radius: 0;
-            padding: 50px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .form-control {
-            padding: 15px 20px;
-            border-radius: 0;
-            margin-bottom: 25px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s;
-            font-size: 1rem;
-            background-color: var(--bg-light);
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: none;
-            background-color: white;
-        }
-        
-        .form-label {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-dark);
+            margin-bottom: 15px;
             font-size: 0.9rem;
             letter-spacing: 0.5px;
         }
         
-        .badge-preview-container {
-            background-color: white;
-            border-radius: 0;
-            padding: 50px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-            display: none;
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        /* Badge Design */
-        .badge-preview {
-            width: 100%;
-            max-width: 800px;
-            aspect-ratio: 3/4;
-            margin: 0 auto;
-            overflow: hidden;
-            background: white;
-            color: var(--text-dark);
-            text-align: center;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .timeline-title {
+            font-size: 1.4rem;
+            color: var(--deep-navy);
+            margin-bottom: 15px;
+            font-weight: 600;
         }
         
-        .badge-preview::before {
+        .timeline-description {
+            color: var(--light-navy);
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        .timeline-highlight {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--gold);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Badge Section */
+        .badge-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--navy) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .badge-section .section-title {
+            color: var(--white);
+        }
+        
+        .badge-section .section-subtitle {
+            color: var(--light-gold);
+        }
+        
+        .badge-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Form Élégant */
+        .badge-form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-title {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .form-control-elegant {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 15px 20px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+        
+        .form-control-elegant:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            color: var(--white);
+        }
+        
+        .form-control-elegant::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-label-elegant {
+            color: var(--light-gold);
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .form-select-elegant {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 15px 20px;
+            color: var(--white);
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+        
+        .form-select-elegant option {
+            background: var(--deep-navy);
+            color: var(--white);
+        }
+        
+        /* Badge Design Élégant */
+        .badge-preview-container {
+            display: none;
+        }
+        
+        .badge-preview-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .badge-preview-card:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(135deg, rgba(230, 126, 34, 0.03) 0%, transparent 50%),
-                linear-gradient(225deg, rgba(108, 92, 231, 0.03) 0%, transparent 50%);
-            z-index: 1;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--gold), var(--growth-green), var(--gold));
         }
         
         .badge-header {
             text-align: center;
+            margin-bottom: 40px;
             position: relative;
-            z-index: 2;
-            margin-bottom: 20px;
+            padding-bottom: 30px;
+        }
+        
+        .badge-header:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
         
         .badge-logo {
             font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            letter-spacing: 3px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        .badge-event-title {
-            font-size: 2.2rem;
-            font-weight: 300;
+            color: var(--deep-navy);
             margin-bottom: 10px;
-            color: var(--text-dark);
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+        
+        .badge-title {
+            font-size: 2.2rem;
+            color: var(--deep-navy);
+            margin-bottom: 10px;
+            font-weight: 600;
             line-height: 1.2;
-            font-family: 'Cormorant Garamond', serif;
         }
         
-        .badge-event-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.7;
-            margin-bottom: 15px;
-            font-weight: 400;
+        .badge-subtitle {
+            font-size: 1.1rem;
+            color: var(--light-navy);
             font-style: italic;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 15px;
         }
         
-        .badge-event-date {
-            font-size: 1.2rem;
-            opacity: 0.7;
-            margin-bottom: 30px;
-            font-weight: 500;
-            color: var(--text-light);
+        .badge-date {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--white);
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         .badge-content {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-            justify-content: center;
-        }
-        
-        .badge-divider {
-            width: 60%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            margin: 30px auto;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 40px;
         }
         
         .badge-photo-container {
-            position: relative;
-            margin-bottom: 30px;
+            flex: 0 0 180px;
+            margin-right: 40px;
         }
         
         .badge-photo-frame {
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            padding: 4px;
-            background: white;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--gold), var(--growth-green));
             position: relative;
-            margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .badge-photo {
@@ -492,274 +562,187 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+            border: 4px solid white;
         }
         
         .badge-photo-placeholder {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--bg-light), #e0e0e0);
+            background: linear-gradient(135deg, var(--light-gray), #ddd);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-light);
-            font-size: 3rem;
+            border: 4px solid white;
+            color: var(--deep-navy);
+            font-size: 3.5rem;
+        }
+        
+        .badge-info {
+            flex: 1;
         }
         
         .badge-name {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            color: var(--deep-navy);
+            margin-bottom: 10px;
             font-weight: 600;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 2;
-            color: var(--text-dark);
-            font-family: 'Cormorant Garamond', serif;
         }
         
         .badge-phone {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            opacity: 0.7;
-            position: relative;
-            z-index: 2;
-            font-weight: 500;
-        }
-        
-        .badge-confirmation {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .confirmation-text {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            color: var(--text-dark);
-            letter-spacing: 3px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        .edition {
-            font-size: 1.1rem;
-            opacity: 0.7;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-        
-        .badge-footer {
-            background: var(--bg-light);
-            border-radius: 0;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .dress-code {
             font-size: 1.2rem;
+            color: var(--light-navy);
             margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .badge-sphere {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--growth-green), var(--leaf-green));
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
             font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        .location {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            font-weight: 500;
-            opacity: 0.7;
-        }
-        
-        .contact {
             font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-            opacity: 0.7;
-        }
-        
-        .organizer-contact {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--primary-color);
-        }
-        
-        /* Button Styles */
-        .btn-download {
-            background: transparent;
-            border: 2px solid var(--success-color);
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 0;
-            transition: all 0.4s ease;
-            color: var(--success-color);
-            margin-top: 30px;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
             letter-spacing: 0.5px;
         }
         
-        .btn-download:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background: var(--success-color);
-            transition: all 0.4s ease;
-            z-index: -1;
+        .badge-mission {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(46, 139, 87, 0.1));
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .mission-title {
+            font-size: 1.8rem;
+            color: var(--deep-navy);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .mission-text {
+            font-size: 1.1rem;
+            color: var(--light-navy);
+            line-height: 1.6;
+        }
+        
+        .badge-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .badge-contact {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .contact-label {
+            font-size: 0.9rem;
+            color: var(--light-navy);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            font-size: 1rem;
+            color: var(--deep-navy);
+            font-weight: 600;
+        }
+        
+        /* Boutons de Téléchargement */
+        .download-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .download-title {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            border: none;
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
         }
         
         .btn-download:hover {
             transform: translateY(-5px);
-            color: white;
-        }
-        
-        .btn-download:hover:before {
-            width: 100%;
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            color: var(--white);
         }
         
         .btn-email {
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--growth-green), var(--leaf-green));
+            border: none;
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 8px;
             font-weight: 600;
-            border-radius: 0;
-            transition: all 0.4s ease;
-            color: var(--accent-color);
-            margin-top: 15px;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-email:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background: var(--accent-color);
-            transition: all 0.4s ease;
-            z-index: -1;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(46, 139, 87, 0.3);
         }
         
         .btn-email:hover {
             transform: translateY(-5px);
-            color: white;
+            box-shadow: 0 15px 30px rgba(46, 139, 87, 0.4);
+            color: var(--white);
         }
         
-        .btn-email:hover:before {
-            width: 100%;
-        }
-        
-        .btn-social {
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            padding: 12px 30px;
+        .btn-share {
+            background: linear-gradient(135deg, var(--light-navy), var(--navy));
+            border: none;
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 8px;
             font-weight: 600;
-            border-radius: 0;
-            transition: all 0.4s ease;
-            color: var(--primary-color);
-            margin-top: 15px;
-            font-size: 1rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-social:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background: var(--primary-color);
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-        
-        .btn-social:hover {
-            transform: translateY(-5px);
-            color: white;
-        }
-        
-        .btn-social:hover:before {
-            width: 100%;
-        }
-        
-        .download-options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        /* Social Share */
-        .social-share {
-            margin-top: 40px;
-            text-align: center;
-        }
-        
-        .social-share h4 {
-            margin-bottom: 20px;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .social-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 0;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(26, 43, 74, 0.3);
         }
         
-        .social-icon.instagram {
-            background: linear-gradient(135deg, #E4405F 0%, #C13584 100%);
-        }
-        
-        .social-icon.facebook {
-            background: linear-gradient(135deg, #1877F2 0%, #0A7CFF 100%);
-        }
-        
-        .social-icon.twitter {
-            background: linear-gradient(135deg, #1DA1F2 0%, #1A91DA 100%);
-        }
-        
-        .social-icon:hover {
+        .btn-share:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(26, 43, 74, 0.4);
+            color: var(--white);
         }
         
-        /* Footer */
+        /* Footer Élégant */
         .footer {
-            background-color: var(--bg-dark);
-            color: white;
+            background: var(--deep-navy);
+            color: var(--white);
             padding: 80px 0 30px;
             position: relative;
-            overflow: hidden;
         }
         
         .footer:before {
@@ -767,46 +750,34 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 3px;
-            background: var(--primary-color);
+            background: linear-gradient(90deg, var(--gold), var(--growth-green), var(--gold));
         }
         
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary-color);
-            margin-bottom: 25px;
+        .footer-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
             display: inline-block;
         }
         
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 0;
-            margin-right: 12px;
-            transition: all 0.3s;
+        .footer-slogan {
+            color: var(--light-gold);
+            margin-bottom: 30px;
             font-size: 1.1rem;
+            line-height: 1.6;
         }
         
-        .social-links a:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-        
-        .footer-links h5 {
-            color: white;
+        .footer-title {
+            color: var(--gold);
+            font-size: 1.2rem;
             margin-bottom: 25px;
             font-weight: 600;
-            font-size: 1.1rem;
         }
         
-        .footer-links ul {
+        .footer-links {
             list-style: none;
             padding: 0;
         }
@@ -816,23 +787,49 @@
         }
         
         .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
         
         .footer-links a:hover {
-            color: var(--primary-color);
-            padding-left: 5px;
+            color: var(--gold);
+            transform: translateX(5px);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .social-icon:hover {
+            background: var(--gold);
+            transform: translateY(-5px);
+            color: var(--deep-navy);
         }
         
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 25px;
+            padding-top: 30px;
             margin-top: 60px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
         
@@ -843,7 +840,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(10, 25, 49, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -852,11 +849,11 @@
         }
         
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            width: 70px;
+            height: 70px;
+            border: 4px solid rgba(212, 175, 55, 0.3);
             border-radius: 50%;
-            border-top-color: var(--primary-color);
+            border-top-color: var(--gold);
             animation: spin 1s ease-in-out infinite;
         }
         
@@ -865,478 +862,135 @@
         }
         
         .loading-text {
-            color: white;
+            color: var(--gold);
             margin-top: 20px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
         }
         
         /* Responsive Design */
         @media (max-width: 1200px) {
-            .event-title {
+            .hero-title {
                 font-size: 4rem;
             }
             
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .badge-preview {
-                padding: 35px;
-            }
-            
-            .badge-logo {
-                font-size: 2.2rem;
-            }
-            
-            .badge-event-title {
-                font-size: 2rem;
-            }
-            
-            .badge-event-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .confirmation-text {
-                font-size: 2.2rem;
+            .timeline-container {
+                padding: 40px 30px;
             }
         }
         
         @media (max-width: 992px) {
-            .event-title {
+            .hero-title {
                 font-size: 3.5rem;
             }
             
-            .event-subtitle {
-                font-size: 1.3rem;
+            .section-title {
+                font-size: 2.5rem;
             }
             
-            .event-date {
-                font-size: 1.6rem;
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                padding-right: 0;
+                padding-left: 70px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                padding-left: 70px;
+            }
+            
+            .timeline-icon {
+                left: 5px;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-icon {
+                left: 5px;
+                right: auto;
+            }
+            
+            .badge-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .badge-photo-container {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .badge-footer {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 120px 0 80px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
             }
             
             .section-title {
                 font-size: 2.2rem;
             }
             
-            .program-section, .badge-section {
-                padding: 100px 0;
+            .badge-form-container {
+                padding: 30px;
             }
             
-            .badge-form-container, .badge-preview-container {
-                padding: 40px;
+            .badge-preview-card {
+                padding: 30px;
             }
             
-            .download-options {
+            .badge-title {
+                font-size: 1.8rem;
+            }
+            
+            .badge-name {
+                font-size: 1.8rem;
+            }
+            
+            .download-buttons {
                 flex-direction: column;
                 align-items: center;
-            }
-            
-            .badge-preview {
-                padding: 30px;
-            }
-            
-            .badge-logo {
-                font-size: 2rem;
-            }
-            
-            .badge-event-title {
-                font-size: 1.8rem;
-            }
-            
-            .badge-event-subtitle {
-                font-size: 1rem;
-            }
-            
-            .badge-event-date {
-                font-size: 1.1rem;
-            }
-            
-            .confirmation-text {
-                font-size: 2rem;
-            }
-            
-            .badge-photo-frame {
-                width: 160px;
-                height: 160px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .event-hero {
-                height: 85vh;
-            }
-            
-            .event-title {
-                font-size: 3rem;
-            }
-            
-            .event-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .event-date {
-                font-size: 1.4rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .program-section, .badge-section {
-                padding: 80px 0;
-            }
-            
-            .badge-form-container, .badge-preview-container {
-                padding: 30px;
-            }
-            
-            .btn-badge {
-                padding: 14px 35px;
-                font-size: 1rem;
-            }
-            
-            .badge-preview {
-                padding: 25px;
-            }
-            
-            .badge-logo {
-                font-size: 1.8rem;
-            }
-            
-            .badge-event-title {
-                font-size: 1.6rem;
-            }
-            
-            .badge-event-subtitle {
-                font-size: 0.9rem;
-            }
-            
-            .badge-event-date {
-                font-size: 1rem;
-            }
-            
-            .confirmation-text {
-                font-size: 1.8rem;
-            }
-            
-            .edition {
-                font-size: 1rem;
-            }
-            
-            .badge-photo-frame {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .badge-photo-placeholder {
-                font-size: 2.5rem;
-            }
-            
-            .dress-code {
-                font-size: 1.1rem;
-            }
-            
-            .location, .contact {
-                font-size: 0.9rem;
-            }
-            
-            .btn-download, .btn-social, .btn-email {
-                padding: 10px 25px;
-                font-size: 0.9rem;
             }
         }
         
         @media (max-width: 576px) {
-            .event-hero {
-                height: 80vh;
-            }
-            
-            .event-title {
+            .hero-title {
                 font-size: 2.5rem;
             }
             
-            .event-subtitle {
+            .hero-subtitle {
                 font-size: 1.1rem;
             }
             
-            .event-date {
-                font-size: 1.2rem;
-            }
-            
             .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .btn-badge {
-                padding: 12px 30px;
-                font-size: 0.9rem;
-            }
-            
-            .program-card-content {
-                padding: 30px 20px;
-            }
-            
-            .badge-form-container, .badge-preview-container {
-                padding: 25px;
-            }
-            
-            .badge-preview {
-                padding: 20px;
-            }
-            
-            .badge-logo {
-                font-size: 1.6rem;
-            }
-            
-            .badge-event-title {
-                font-size: 1.4rem;
-            }
-            
-            .badge-event-subtitle {
-                font-size: 0.8rem;
-            }
-            
-            .badge-event-date {
-                font-size: 0.9rem;
-            }
-            
-            .confirmation-text {
-                font-size: 1.6rem;
-            }
-            
-            .edition {
-                font-size: 0.9rem;
-            }
-            
-            .badge-photo-frame {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .badge-photo-placeholder {
                 font-size: 2rem;
             }
             
-            .btn-download, .btn-social, .btn-email {
-                padding: 10px 20px;
-                font-size: 0.9rem;
+            .timeline-content {
+                padding: 20px;
             }
-        }@media (max-width: 768px) {
-    .badge-preview-container {
-        padding: 20px 15px;
-        margin: 0 -10px;
-        width: calc(100% + 20px);
-    }
-    
-    .badge-preview {
-        aspect-ratio: 2/3;
-        padding: 25px 20px;
-        max-width: 100%;
-        transform: scale(0.95);
-        transform-origin: center;
-    }
-    
-    .badge-logo {
-        font-size: 1.6rem !important;
-        margin-bottom: 10px;
-    }
-    
-    .badge-event-title {
-        font-size: 1.4rem !important;
-        line-height: 1.3;
-        margin-bottom: 8px;
-    }
-    
-    .badge-event-subtitle {
-        font-size: 0.9rem !important;
-        margin-bottom: 10px;
-        line-height: 1.4;
-    }
-    
-    .badge-event-date {
-        font-size: 0.9rem !important;
-        margin-bottom: 20px;
-    }
-    
-    .badge-photo-frame {
-        width: 120px !important;
-        height: 120px !important;
-        margin-bottom: 15px;
-    }
-    
-    .badge-photo-placeholder {
-        font-size: 2rem !important;
-    }
-    
-    .badge-name {
-        font-size: 1.4rem !important;
-        margin-bottom: 10px;
-    }
-    
-    .badge-phone {
-        font-size: 0.9rem !important;
-        margin-bottom: 10px;
-    }
-    
-    .confirmation-text {
-        font-size: 1.4rem !important;
-        letter-spacing: 2px;
-        margin-bottom: 5px;
-    }
-    
-    .edition {
-        font-size: 0.8rem !important;
-    }
-    
-    .badge-divider {
-        margin: 20px auto;
-        width: 80%;
-    }
-    
-    .dress-code {
-        font-size: 1rem !important;
-        margin-bottom: 10px;
-    }
-    
-    .location, .contact {
-        font-size: 0.8rem !important;
-        margin-bottom: 8px;
-    }
-    
-    .download-options {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    
-    .btn-download, .btn-email, .btn-social {
-        width: 100%;
-        margin-top: 0;
-        padding: 12px 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .badge-preview {
-        padding: 20px 15px;
-        transform: scale(0.9);
-    }
-    
-    .badge-logo {
-        font-size: 1.4rem !important;
-    }
-    
-    .badge-event-title {
-        font-size: 1.2rem !important;
-    }
-    
-    .badge-event-subtitle {
-        font-size: 0.8rem !important;
-    }
-    
-    .badge-photo-frame {
-        width: 100px !important;
-        height: 100px !important;
-    }
-    
-    .badge-name {
-        font-size: 1.2rem !important;
-    }
-    
-    .confirmation-text {
-        font-size: 1.2rem !important;
-    }
-}
-
-@media (max-width: 400px) {
-    .badge-preview {
-        transform: scale(0.85);
-        padding: 15px 10px;
-    }
-    
-    .badge-logo {
-        font-size: 1.2rem !important;
-    }
-    
-    .badge-event-title {
-        font-size: 1.1rem !important;
-    }
-}
-
-/* Amélioration du formulaire sur mobile */
-@media (max-width: 768px) {
-    .badge-form-container {
-        padding: 30px 20px;
-        margin: 0 -10px;
-        width: calc(100% + 20px);
-    }
-    
-    .form-control {
-        padding: 12px 15px;
-        font-size: 16px; /* Évite le zoom sur iOS */
-    }
-    
-    .btn-badge {
-        width: 100%;
-        padding: 14px 20px;
-    }
-}
-
-/* Correction pour l'orientation paysage sur mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-    .badge-section {
-        padding: 60px 0;
-    }
-    
-    .badge-preview {
-        max-height: 90vh;
-        aspect-ratio: 3/4;
-    }
-}
-
-/* Amélioration de la navigation sur mobile */
-@media (max-width: 768px) {
-    .navbar-brand {
-        font-size: 1.5rem;
-    }
-    
-    .nav-link {
-        padding: 10px 15px !important;
-        text-align: center;
-    }
-}
-
-/* Optimisation du chargement des images */
-.badge-photo {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Assurer que le badge reste centré */
-.badge-preview-container .row {
-    justify-content: center;
-}
-
-/* Styles pour les très petits écrans */
-@media (max-width: 360px) {
-    .badge-preview {
-        transform: scale(0.8);
-    }
-    
-    .event-title {
-        font-size: 2rem;
-    }
-    
-    .event-subtitle {
-        font-size: 1rem;
-    }
-}
-
-
+            
+            .badge-photo-frame {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .badge-photo-placeholder {
+                font-size: 2.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1344,259 +998,188 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="text-center">
             <div class="spinner"></div>
-            <div class="loading-text">Envoi du badge en cours...</div>
+            <div class="loading-text">Génération du badge en cours...</div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <!-- Navigation Élégante -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fas fa-fire"></i>FLAMBEAU</a>
+            <a class="navbar-brand luxury-title" href="#">FLAMBEAU</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Accueil</a>
+                        <a class="nav-link" href="#programme">Programme</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#evenement">Événement</a>
+                        <a class="nav-link active" href="#badge">Badge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html#apropos">À propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#contact">Contact</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Event Hero Section -->
-    <section class="event-hero" id="evenement">
-        <div class="hero-background"></div>
+    <!-- Hero Section -->
+    <section class="hero-section">
         <div class="hero-pattern"></div>
         <div class="container">
-            <div class="event-hero-content">
-                <h1 class="event-title spiritual-title">Reconnecter à la Source</h1>
-                <p class="event-subtitle">Libérer son don pour réussir dans tous les domaines de la vie</p>
-                <div class="event-date">Samedi 29 Novembre 2025 | 18h00 - 21h30</div>
-                <button class="btn btn-badge" id="generateBadgeBtn">Générer mon badge "J'y serai"</button>
+            <div class="hero-content">
+                <h1 class="hero-title elegant-title">La Graine du Changement</h1>
+                <p class="hero-subtitle">Devenir l'ambassadeur qui transforme les sphères d'influence</p>
+                <div class="event-date">
+                    <i class="fas fa-calendar-alt me-2"></i>Samedi 27 Décembre 2025 | 16h00 - 19h00
+                </div>
+                <button class="btn btn-elegant" id="generateBadgeBtn">
+                    <i class="fas fa-seedling me-2"></i>Générer mon Badge de participation
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Program Section -->
-    <section class="program-section">
-        <div class="container">
-            <h2 class="section-title">Programme de l'Événement</h2>
-            <p class="section-subtitle">Découvrez les moments forts de cette soirée transformatrice</p>
-            
-            <div class="row">
-                <!-- Program Card 1 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3 class="program-card-title">Accueil & Ambiance de reconnexion</h3>
-                            <p>Fond musical d'adoration douce. Équipe d'accueil chaleureuse. Distribution d'un petit papier avec la consigne : « Qu'est-ce qui m'empêche de réussir pleinement ? » Temps de silence intérieur / courte prière d'ouverture.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Program Card 2 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-hands-praying"></i>
-                            </div>
-                            <h3 class="program-card-title">Louange et Adoration</h3>
-                            <p>Louange dynamique : célébrer la grandeur de Dieu, la Source de toute ressource. Adoration profonde : créer une atmosphère de connexion intérieure et spirituelle. Objectif : disposer les cœurs à la transformation.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Program Card 3 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3 class="program-card-title">Activité interactive : "Se faire un ami"</h3>
-                            <p>Chaque participant échange avec quelqu'un de nouveau. Chacun partage une qualité, un don ou une grâce qu'il reconnaît chez lui ou chez l'autre. Temps d'encouragements réciproques. Se conclut par un court moment de réseautage spirituel.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Program Card 4 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-pray"></i>
-                            </div>
-                            <h3 class="program-card-title">Adoration d'approfondissement</h3>
-                            <p>Retour dans la présence de Dieu à travers un chant méditatif. Exemples : "Je reviens à la Source", "Saint-Esprit viens", "Tout est à toi". Transition douce vers le message central.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Program Card 5 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-microphone"></i>
-                            </div>
-                            <h3 class="program-card-title">Communication principale</h3>
-                            <p>"Reconnecter à la Source de mes ressources" - Enseignement/partage structuré autour de trois vérités : Dieu, la Source de toute capacité. L'âme, le corps et l'esprit : comprendre l'équilibre intérieur. Libérer son don pour manifester la réussite divine.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Program Card 6 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <h3 class="program-card-title">Acte symbolique : Libérer les blocages</h3>
-                            <p>Chacun s'avance pour déposer son papier (dans une urne ou un feu symbolique). Lecture de quelques papiers (sans noms) pour illustrer les luttes communes. Moment de prière intense et prophétique pour briser les blocages, libérer les dons et reconnecter à la Source.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Program Card 7 -->
-                <div class="col-lg-8 mx-auto mb-4">
-                    <div class="program-card">
-                        <div class="program-card-content">
-                            <div class="program-card-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h3 class="program-card-title">Clôture & Envoi</h3>
-                            <p>Prix de clôture : engagement à vivre selon l'Esprit. Témoignage d'une personne transformée par la reconnexion à Dieu. Mot de fin inspirant : bénédiction et rappel de la mission personnelle. Chant final collectif : "Nous sommes une génération choisie". Sortie joyeuse, musique festive, fraternité, cocktail.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Badge Section -->
     <section class="badge-section" id="badge">
         <div class="container">
-            <h2 class="section-title">Générer votre badge</h2>
-            <p class="section-subtitle">Créez votre badge personnalisé pour confirmer votre participation</p>
-            
-            <!-- Badge Form -->
-            <div class="badge-form-container" id="badgeFormContainer">
-                <h3 class="text-center mb-4">Remplissez vos informations</h3>
-                <form id="badgeForm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label for="firstName" class="form-label">Prénom</label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-4">
-                                <label for="lastName" class="form-label">Nom</label>
-                                <input type="text" class="form-control" id="lastName" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="phone" class="form-label">Téléphone</label>
-                        <input type="tel" class="form-control" id="phone" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="photo" class="form-label">Photo (optionnelle)</label>
-                        <input type="file" class="form-control" id="photo" accept="image/*">
-                        <div class="form-text">Formats acceptés: JPG, PNG. Taille maximale: 2MB.</div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-badge">Générer mon badge</button>
-                    </div>
-                </form>
+            <div class="section-header">
+                <h2 class="section-title elegant-title">Devenir Ambassadeur</h2>
+                <p class="section-subtitle">Générez votre badge d'ambassadeur et engagez-vous à transformer votre sphère d'influence</p>
             </div>
             
-            <!-- Badge Preview -->
-            <div class="badge-preview-container" id="badgePreviewContainer">
-                <h3 class="text-center mb-4">Votre badge "J'y serai"</h3>
-                <div class="badge-preview" id="badgePreview">
-                    <div class="badge-header">
-                        <div class="badge-logo">FLAMBEAU</div>
-                        <div class="badge-event-title">Reconnecter à la Source</div>
-                        <div class="badge-event-subtitle">Libérer son don pour réussir dans tous les domaines de la vie</div>
-                        <div class="badge-event-date">Samedi 29 Novembre 2025 | 18h00 - 21h30</div>
-                    </div>
-                    
-                    <div class="badge-content">
-                        <div class="badge-divider"></div>
+            <div class="badge-container">
+                <!-- Formulaire -->
+                <div class="badge-form-container" id="badgeFormContainer">
+                    <h3 class="form-title">Formulaire d'inscription</h3>
+                    <form id="badgeForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label-elegant">Prénom</label>
+                                <input type="text" class="form-control-elegant" id="firstName" required placeholder="Votre prénom">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-elegant">Nom</label>
+                                <input type="text" class="form-control-elegant" id="lastName" required placeholder="Votre nom">
+                            </div>
+                        </div>
                         
-                        <div class="badge-photo-container">
-                            <div class="badge-photo-frame">
-                                <img id="badgePhoto" src="" alt="Photo" class="badge-photo" style="display: none;">
-                                <div class="badge-photo-placeholder" id="badgePhotoPlaceholder" style="display: flex;">
-                                    <i class="fas fa-user"></i>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <label class="form-label-elegant">Téléphone</label>
+                                <input type="tel" class="form-control-elegant" id="phone" required placeholder="Votre numéro">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label-elegant">Email</label>
+                                <input type="email" class="form-control-elegant" id="email" required placeholder="votre@email.com">
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <label class="form-label-elegant">Sphère d'influence principale</label>
+                                <select class="form-select-elegant" id="sphere">
+                                    <option value="">Choisissez votre sphère d'influence</option>
+                                    <option value="Politique">Politique</option>
+                                    <option value="Gouvernements">Gouvernements</option>
+                                    <option value="Système Législatif">Système Législatif</option>
+                                    <option value="Économie">Économie</option>
+                                    <option value="Culture">Culture</option>
+                                    <option value="Société Civile">Société Civile</option>
+                                    <option value="Système Social">Système Social</option>
+                                    <option value="Art">Art</option>
+                                    <option value="Éducation">Éducation</option>
+                                    <option value="Médecine">Médecine</option>
+                                    <option value="Affaires">Affaires</option>
+                                    <option value="Religion">Religion</option>
+                                    <option value="Sport">Sport</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <label class="form-label-elegant">Photo (optionnelle)</label>
+                                <input type="file" class="form-control-elegant" id="photo" accept="image/*">
+                                <small class="text-muted d-block mt-2" style="color: rgba(255,255,255,0.6) !important;">Formats acceptés: JPG, PNG. Taille max: 2MB</small>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-elegant">
+                                <i class="fas fa-id-card me-2"></i>Générer mon badge d'ambassadeur
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Aperçu du Badge -->
+                <div class="badge-preview-container" id="badgePreviewContainer">
+                    <div class="badge-preview-card">
+                        <div class="badge-header">
+                            <div class="badge-logo luxury-title">FLAMBEAU</div>
+                            <div class="badge-title elegant-title">Ambassadeur du Changement</div>
+                            <div class="badge-subtitle">Planter aujourd'hui pour transformer demain</div>
+                            <div class="badge-date mt-3">29 Mars 2025 | 16h00 - 19h00</div>
+                        </div>
+                        
+                        <div class="badge-content">
+                            <div class="badge-photo-container">
+                                <div class="badge-photo-frame">
+                                    <img id="badgePhoto" src="" alt="Photo" class="badge-photo" style="display: none;">
+                                    <div class="badge-photo-placeholder" id="badgePhotoPlaceholder">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="badge-info">
+                                <div class="badge-name" id="badgeName">Prénom Nom</div>
+                                <div class="badge-phone" id="badgePhone">Téléphone: </div>
+                                <div class="mt-3">
+                                    <span class="badge-sphere" id="badgeSphere">Sphère d'influence</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="badge-name spiritual-title" id="badgeName">Nom Prénom</div>
-                        <div class="badge-phone" id="badgePhone">Téléphone: </div>
-                        
-                        <div class="badge-confirmation">
-                            <div class="confirmation-text">J'Y SERAI</div>
-                            <div class="edition"> Nous contacter: 0161924532/ 0196226313</div>
+                        <div class="badge-mission">
+                            <div class="mission-title">Mission d'Ambassadeur</div>
+                            <div class="mission-text">
+                                "Je m'engage à influencer positivement ma sphère d'influence et à être une graine de transformation dans mon domaine, pour la gloire de Dieu."
+                            </div>
                         </div>
                         
-                        <div class="badge-divider"></div>
+                        <div class="badge-footer">
+                            <div class="badge-contact">
+                                <div class="contact-label">CONTACT</div>
+                                <div class="contact-info">016 19 24 532</div>
+                            </div>
+                            <div class="badge-contact">
+                                <div class="contact-label">EMAIL</div>
+                                <div class="contact-info">contact@flambeau.org</div>
+                            </div>
+                            <div class="badge-contact">
+                                <div class="contact-label">LIEU</div>
+                                <div class="contact-info">Abomey Calavi</div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="badge-footer">
-                        <div class="dress-code">Code vestimentaire: Élégant</div>
-                        <div class="location">Lieu: Commune d'Abomey Calavi</div>
-                        <div class="contact">Email: contact@flambeau.org</div>
-                    </div>
-                </div>
-                
-                <div class="download-options">
-                    <button class="btn btn-download" id="downloadPdfBtn">
-                        <i class="fas fa-file-pdf me-2"></i>Télécharger en PDF
-                    </button>
-                    <button class="btn btn-email" id="sendEmailBtn">
-                        <i class="fas fa-envelope me-2"></i>Envoyer par Email
-                    </button>
-                    <button class="btn btn-social" id="downloadImageBtn">
-                        <i class="fas fa-image me-2"></i>Télécharger en Image
-                    </button>
-                </div>
-                
-                <div class="social-share">
-                    <h4>Partager sur les réseaux</h4>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon instagram" id="shareInstagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-icon facebook" id="shareFacebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon twitter" id="shareTwitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
+                    <!-- Boutons de Téléchargement -->
+                    <div class="download-section">
+                        <h4 class="download-title">Télécharger & Partager</h4>
+                        <div class="download-buttons">
+                            <button class="btn btn-email" id="sendEmailBtn">
+                                <i class="fas fa-envelope"></i> Envoyer par Email
+                            </button>
+                            <button class="btn btn-share" id="downloadImageBtn">
+                                <i class="fas fa-image"></i> Télécharger Image
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1604,53 +1187,45 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-5">
-                    <a href="index.html" class="footer-logo"><i class="fas fa-fire"></i>FLAMBEAU</a>
-                    <p class="mt-3">« S'épanouir pour servir » - Former, accompagner et impacter les nations par la lumière du Christ.</p>
-                    <div class="social-links mt-4">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <div class="footer-brand luxury-title">FLAMBEAU</div>
+                    <p class="footer-slogan">« S'épanouir pour servir » – Former une génération d'ambassadeurs qui transforment les sphères d'influence par la lumière du Christ.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 mb-5">
-                    <div class="footer-links">
-                        <h5>Liens rapides</h5>
-                        <ul>
-                            <li><a href="index.html">Accueil</a></li>
-                            <li><a href="#evenement">Événement</a></li>
-                            <li><a href="index.html#apropos">À propos</a></li>
-                            <li><a href="index.html#domaines">Nos domaines</a></li>
-                            <li><a href="index.html#contact">Contact</a></li>
-                        </ul>
-                    </div>
+                
+                <div class="col-lg-4 mb-5">
+                    <h5 class="footer-title">Liens Rapides</h5>
+                    <ul class="footer-links">
+                        <li><a href="#programme">Programme de l'événement</a></li>
+                        <li><a href="#badge">Devenir ambassadeur</a></li>
+                        <li><a href="#">Les 13 sphères d'influence</a></li>
+                        <li><a href="#">Témoignages</a></li>
+                        <li><a href="#">Ressources</a></li>
+                    </ul>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-5">
-                    <div class="footer-links">
-                        <h5>Informations</h5>
-                        <ul>
-                            <li><a href="#">Politique de confidentialité</a></li>
-                            <li><a href="#">Conditions d'utilisation</a></li>
-                            <li><a href="#">Mentions légales</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="footer-links">
-                        <h5>Contact</h5>
-                        <p>Email: contact@flambeau.org</p>
-                        <p>Téléphone: +229 016 19 24 532 / +229 019 62 26 313</p>
-                        <p>Adresse: Commune d'Abomey Calavi</p>
-                    </div>
+                
+                <div class="col-lg-4 mb-5">
+                    <h5 class="footer-title">Contact & Information</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone me-2"></i> +229 016 19 24 532</li>
+                        <li><i class="fas fa-phone me-2"></i> +229 019 62 26 313</li>
+                        <li><i class="fas fa-envelope me-2"></i> contact@flambeau.org</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Commune d'Abomey Calavi</li>
+                        <li><i class="fas fa-clock me-2"></i> Samedi 29 Mars 2025, 17h-20h</li>
+                    </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2025 FLAMBEAU. Tous droits réservés.</p>
+                <p>&copy; 2025 FLAMBEAU. Tous droits réservés. | « Je suis une graine du changement »</p>
             </div>
         </div>
     </footer>
@@ -1658,7 +1233,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialisation EmailJS - À remplacer avec vos clés
+        // Initialisation EmailJS
         (function(){
             emailjs.init("YOUR_PUBLIC_KEY");
         })();
@@ -1669,18 +1244,15 @@
                 badgeForm: document.getElementById('badgeForm'),
                 badgeFormContainer: document.getElementById('badgeFormContainer'),
                 badgePreviewContainer: document.getElementById('badgePreviewContainer'),
-                badgePreview: document.getElementById('badgePreview'),
                 badgeName: document.getElementById('badgeName'),
                 badgePhone: document.getElementById('badgePhone'),
+                badgeSphere: document.getElementById('badgeSphere'),
                 badgePhoto: document.getElementById('badgePhoto'),
                 badgePhotoPlaceholder: document.getElementById('badgePhotoPlaceholder'),
                 generateBadgeBtn: document.getElementById('generateBadgeBtn'),
                 downloadPdfBtn: document.getElementById('downloadPdfBtn'),
                 downloadImageBtn: document.getElementById('downloadImageBtn'),
                 sendEmailBtn: document.getElementById('sendEmailBtn'),
-                shareInstagram: document.getElementById('shareInstagram'),
-                shareFacebook: document.getElementById('shareFacebook'),
-                shareTwitter: document.getElementById('shareTwitter'),
                 loadingOverlay: document.getElementById('loadingOverlay'),
                 navbar: document.querySelector('.navbar')
             };
@@ -1688,13 +1260,12 @@
             let currentBadgeImage = null;
             let currentParticipantData = {};
 
-            // Fonction utilitaire pour valider les emails
+            // Fonctions de validation
             const validateEmail = (email) => {
                 const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return re.test(email);
             };
 
-            // Fonction utilitaire pour valider les numéros de téléphone
             const validatePhone = (phone) => {
                 const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
                 return re.test(phone);
@@ -1709,14 +1280,15 @@
             DOM.badgeForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Récupération des valeurs du formulaire
+                // Récupération des valeurs
                 const firstName = document.getElementById('firstName').value.trim();
                 const lastName = document.getElementById('lastName').value.trim();
                 const phone = document.getElementById('phone').value.trim();
                 const email = document.getElementById('email').value.trim();
+                const sphere = document.getElementById('sphere').value;
                 const photoFile = document.getElementById('photo').files[0];
 
-                // Validation des champs
+                // Validation
                 if (!firstName || !lastName) {
                     alert('Veuillez saisir votre nom complet.');
                     return;
@@ -1732,16 +1304,21 @@
                     return;
                 }
 
-                // Stockage des données du participant
-                currentParticipantData = { firstName, lastName, phone, email };
+                if (!sphere) {
+                    alert('Veuillez sélectionner une sphère d\'influence.');
+                    return;
+                }
 
-                // Mise à jour de l'aperçu du badge
+                // Stockage des données
+                currentParticipantData = { firstName, lastName, phone, email, sphere };
+
+                // Mise à jour de l'aperçu
                 DOM.badgeName.textContent = `${firstName} ${lastName}`;
                 DOM.badgePhone.textContent = `Téléphone: ${phone}`;
+                DOM.badgeSphere.textContent = sphere;
 
-                // Gestion de la photo si fournie
+                // Gestion de la photo
                 if (photoFile) {
-                    // Validation de la taille du fichier (max 2MB)
                     if (photoFile.size > 2 * 1024 * 1024) {
                         alert('La photo ne doit pas dépasser 2MB.');
                         return;
@@ -1759,96 +1336,108 @@
                     DOM.badgePhotoPlaceholder.style.display = 'flex';
                 }
 
-                // Affichage de l'aperçu et masquage du formulaire
+                // Affichage de l'aperçu
                 DOM.badgeFormContainer.style.display = 'none';
                 DOM.badgePreviewContainer.style.display = 'block';
 
-                // Scroll vers l'aperçu du badge
+                // Scroll vers l'aperçu
                 DOM.badgePreviewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
-            // Téléchargement du badge en PDF
+            // Téléchargement PDF
             DOM.downloadPdfBtn.addEventListener('click', function() {
-                // Vérification que les scripts sont chargés
                 if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
                     alert('Erreur: Les bibliothèques nécessaires ne sont pas chargées.');
                     return;
                 }
 
-                html2canvas(DOM.badgePreview, {
+                const badgeElement = document.querySelector('.badge-preview-card');
+                
+                DOM.loadingOverlay.style.display = 'flex';
+                
+                html2canvas(badgeElement, {
                     scale: 3,
                     useCORS: true,
                     logging: false,
-                    backgroundColor: null
+                    backgroundColor: '#FFFFFF'
                 }).then(canvas => {
                     const imgData = canvas.toDataURL('image/png');
                     const { jsPDF } = window.jspdf;
                     const pdf = new jsPDF({
                         orientation: 'portrait',
                         unit: 'mm',
-                        format: [100, 133]
+                        format: [100, 140]
                     });
 
                     const pdfWidth = pdf.internal.pageSize.getWidth();
                     const pdfHeight = pdf.internal.pageSize.getHeight();
 
                     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save(`badge-${DOM.badgeName.textContent.replace(' ', '-')}.pdf`);
+                    pdf.save(`badge-ambassadeur-${currentParticipantData.firstName}-${currentParticipantData.lastName}.pdf`);
 
                     currentBadgeImage = imgData;
+                    DOM.loadingOverlay.style.display = 'none';
                 }).catch(error => {
-                    console.error('Erreur lors de la génération du PDF:', error);
-                    alert('Une erreur est survenue lors de la génération du PDF.');
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue.');
+                    DOM.loadingOverlay.style.display = 'none';
                 });
             });
 
-            // Téléchargement du badge en image
+            // Téléchargement Image
             DOM.downloadImageBtn.addEventListener('click', function() {
                 if (typeof html2canvas === 'undefined') {
                     alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
                     return;
                 }
 
-                html2canvas(DOM.badgePreview, {
+                const badgeElement = document.querySelector('.badge-preview-card');
+                
+                DOM.loadingOverlay.style.display = 'flex';
+                
+                html2canvas(badgeElement, {
                     scale: 3,
                     useCORS: true,
                     logging: false,
-                    backgroundColor: null
+                    backgroundColor: '#FFFFFF'
                 }).then(canvas => {
                     const imgData = canvas.toDataURL('image/png');
                     const link = document.createElement('a');
-                    link.download = `badge-${DOM.badgeName.textContent.replace(' ', '-')}.png`;
+                    link.download = `badge-ambassadeur-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
                     link.href = imgData;
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
 
                     currentBadgeImage = imgData;
+                    DOM.loadingOverlay.style.display = 'none';
                 }).catch(error => {
-                    console.error('Erreur lors de la génération de l\'image:', error);
-                    alert('Une erreur est survenue lors de la génération de l\'image.');
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue.');
+                    DOM.loadingOverlay.style.display = 'none';
                 });
             });
 
-            // Envoi du badge par email
+            // Envoi Email
             DOM.sendEmailBtn.addEventListener('click', function() {
                 if (!currentBadgeImage) {
-                    if (typeof html2canvas === 'undefined') {
-                        alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
-                        return;
-                    }
-
-                    html2canvas(DOM.badgePreview, {
+                    // Générer l'image d'abord
+                    const badgeElement = document.querySelector('.badge-preview-card');
+                    
+                    DOM.loadingOverlay.style.display = 'flex';
+                    
+                    html2canvas(badgeElement, {
                         scale: 3,
                         useCORS: true,
                         logging: false,
-                        backgroundColor: null
+                        backgroundColor: '#FFFFFF'
                     }).then(canvas => {
                         currentBadgeImage = canvas.toDataURL('image/png');
                         sendBadgeByEmail();
                     }).catch(error => {
-                        console.error('Erreur lors de la génération de l\'image:', error);
-                        alert('Une erreur est survenue lors de la génération de l\'image.');
+                        console.error('Erreur:', error);
+                        alert('Une erreur est survenue.');
+                        DOM.loadingOverlay.style.display = 'none';
                     });
                 } else {
                     sendBadgeByEmail();
@@ -1860,22 +1449,22 @@
                 DOM.loadingOverlay.style.display = 'flex';
 
                 const templateParams = {
-                    to_name: 'Quentin',
+                    to_name: 'Organisateur FLAMBEAU',
                     from_name: `${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
                     from_email: currentParticipantData.email,
                     participant_name: `${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
                     participant_phone: currentParticipantData.phone,
                     participant_email: currentParticipantData.email,
-                    message: `Nouveau badge généré pour ${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+                    participant_sphere: currentParticipantData.sphere,
+                    message: `Nouvel ambassadeur inscrit pour l'événement "La Graine du Changement"`,
                     badge_image: currentBadgeImage
                 };
 
-                // Envoi via EmailJS
                 if (typeof emailjs !== 'undefined') {
                     emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
                         .then(function(response) {
                             DOM.loadingOverlay.style.display = 'none';
-                            alert('Badge envoyé avec succès à quentinsacla@gmail.com !');
+                            alert('Badge envoyé avec succès !');
                         }, function(error) {
                             console.error('Erreur EmailJS:', error);
                             DOM.loadingOverlay.style.display = 'none';
@@ -1887,12 +1476,12 @@
                 }
             }
 
-            // Solution de secours pour l'envoi d'email
+            // Solution de secours pour email
             function fallbackEmail() {
-                const subject = `Badge FLAMBEAU - ${currentParticipantData.firstName} ${currentParticipantData.lastName}`;
-                const body = `Bonjour,\n\nVoici le badge de ${currentParticipantData.firstName} ${currentParticipantData.lastName} pour l'événement FLAMBEAU "Reconnecter à la Source".\n\nInformations du participant:\n- Nom: ${currentParticipantData.firstName} ${currentParticipantData.lastName}\n- Téléphone: ${currentParticipantData.phone}\n- Email: ${currentParticipantData.email}\n\nLe badge est en pièce jointe.\n\nCordialement,\nSystème de génération de badges FLAMBEAU`;
+                const subject = `Badge Ambassadeur - ${currentParticipantData.firstName} ${currentParticipantData.lastName}`;
+                const body = `Bonjour,\n\nVoici le badge d'ambassadeur de ${currentParticipantData.firstName} ${currentParticipantData.lastName} pour l'événement "La Graine du Changement".\n\nInformations :\n- Nom: ${currentParticipantData.firstName} ${currentParticipantData.lastName}\n- Téléphone: ${currentParticipantData.phone}\n- Email: ${currentParticipantData.email}\n- Sphère: ${currentParticipantData.sphere}\n\nMission: Influencer positivement cette sphère pour Christ.\n\nLe badge est en pièce jointe.\n\nCordialement,\nSystème FLAMBEAU`;
 
-                // Téléchargement de l'image d'abord
+                // Télécharger d'abord
                 const link = document.createElement('a');
                 link.download = `badge-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
                 link.href = currentBadgeImage;
@@ -1900,26 +1489,13 @@
                 link.click();
                 document.body.removeChild(link);
 
-                // Ouverture du client email
+                // Ouvrir client email
                 setTimeout(() => {
-                    window.location.href = `mailto:quentinsacla@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = `mailto:contact@flambeau.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 }, 1000);
             }
 
-            // Partage sur les réseaux sociaux
-            [DOM.shareInstagram, DOM.shareFacebook, DOM.shareTwitter].forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (currentBadgeImage) {
-                        const platform = this.id.replace('share', '').toLowerCase();
-                        alert(`Pour partager sur ${platform}:\n1. Téléchargez d'abord l'image du badge\n2. Ouvrez ${platform} et créez un nouveau post\n3. Sélectionnez l'image téléchargée\n4. Ajoutez une légende et partagez!`);
-                    } else {
-                        alert("Veuillez d'abord générer votre badge pour le partager.");
-                    }
-                });
-            });
-
-            // Effet de scroll sur la navbar
+            // Effet de scroll sur navbar
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 100) {
                     DOM.navbar.classList.add('scrolled');
@@ -1928,9 +1504,9 @@
                 }
             });
 
-            // Animation au scroll pour les cartes de programme
-            const animateOnScroll = function() {
-                const elements = document.querySelectorAll('.program-card');
+            // Animation des éléments de timeline
+            const animateTimeline = function() {
+                const elements = document.querySelectorAll('.timeline-content');
                 const screenPosition = window.innerHeight / 1.2;
 
                 elements.forEach(element => {
@@ -1943,75 +1519,17 @@
                 });
             };
 
-            // État initial pour les éléments animés
-            const animatedElements = document.querySelectorAll('.program-card');
+            // Initialiser l'animation
+            const animatedElements = document.querySelectorAll('.timeline-content');
             animatedElements.forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(30px)';
                 element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             });
 
-            window.addEventListener('scroll', animateOnScroll);
-            // Déclenchement initial au chargement
-            animateOnScroll();
+            window.addEventListener('scroll', animateTimeline);
+            animateTimeline();
         });
-    // Ajoutez cette fonction à votre code JavaScript existant
-function optimizeForMobile() {
-    const isMobile = window.innerWidth <= 768;
-    const badgePreview = document.getElementById('badgePreview');
-    
-    if (isMobile) {
-        // Optimisations spécifiques mobile
-        badgePreview.style.maxWidth = '100%';
-        badgePreview.style.margin = '0 auto';
-        
-        // Ajuster l'échelle pour les très petits écrans
-        if (window.innerWidth <= 400) {
-            badgePreview.style.transform = 'scale(0.9)';
-            badgePreview.style.transformOrigin = 'center top';
-        }
-    } else {
-        // Reset pour desktop
-        badgePreview.style.transform = 'none';
-    }
-}
-
-// Appeler la fonction au chargement et au redimensionnement
-window.addEventListener('load', optimizeForMobile);
-window.addEventListener('resize', optimizeForMobile);
-
-// Optimisation du téléchargement pour mobile
-DOM.downloadImageBtn.addEventListener('click', function() {
-    if (typeof html2canvas === 'undefined') {
-        alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
-        return;
-    }
-
-    // Ajuster l'échelle pour mobile
-    const scale = window.innerWidth <= 768 ? 2 : 3;
-
-    html2canvas(DOM.badgePreview, {
-        scale: scale,
-        useCORS: true,
-        logging: false,
-        backgroundColor: null,
-        width: DOM.badgePreview.offsetWidth,
-        height: DOM.badgePreview.offsetHeight
-    }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.download = `badge-${DOM.badgeName.textContent.replace(' ', '-')}.png`;
-        link.href = imgData;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        currentBadgeImage = imgData;
-    }).catch(error => {
-        console.error('Erreur lors de la génération de l\'image:', error);
-        alert('Une erreur est survenue lors de la génération de l\'image.');
-    });
-});
     </script>
 </body>
 </html>
