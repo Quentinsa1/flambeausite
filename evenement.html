@@ -1346,39 +1346,169 @@
 
         
             // Téléchargement Image
-            DOM.downloadImageBtn.addEventListener('click', function() {
-                if (typeof html2canvas === 'undefined') {
-                    alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
-                    return;
-                }
+// Dans la section de téléchargement d'image, modifiez le code comme suit :
 
-                const badgeElement = document.querySelector('.badge-preview-card');
-                
-                DOM.loadingOverlay.style.display = 'flex';
-                
-                html2canvas(badgeElement, {
-                    scale: 3,
-                    useCORS: true,
-                    logging: false,
-                    backgroundColor: '#FFFFFF'
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const link = document.createElement('a');
-                    link.download = `badge-ambassadeur-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
-                    link.href = imgData;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+DOM.downloadImageBtn.addEventListener('click', function() {
+    if (typeof html2canvas === 'undefined') {
+        alert('Erreur: La bibliothèque nécessaire n\'est pas chargée.');
+        return;
+    }
 
-                    currentBadgeImage = imgData;
+    const badgeElement = document.querySelector('.badge-preview-card');
+    
+    DOM.loadingOverlay.style.display = 'flex';
+    
+    // Créer une copie de l'élément pour le mobile
+    const mobileBadge = badgeElement.cloneNode(true);
+    
+    // Appliquer les styles pour mobile
+    mobileBadge.style.width = "350px"; // Largeur réduite pour mobile
+    mobileBadge.style.maxWidth = "90vw"; // Maximum 90% de la largeur de l'écran
+    mobileBadge.style.padding = "25px";
+    mobileBadge.style.margin = "0 auto";
+    
+    // Ajuster les polices pour mobile
+    const logo = mobileBadge.querySelector('.badge-logo');
+    const title = mobileBadge.querySelector('.badge-title');
+    const name = mobileBadge.querySelector('.badge-name');
+    const missionTitle = mobileBadge.querySelector('.mission-title');
+    
+    if (logo) logo.style.fontSize = "2rem";
+    if (title) title.style.fontSize = "1.8rem";
+    if (name) name.style.fontSize = "1.8rem";
+    if (missionTitle) missionTitle.style.fontSize = "1.5rem";
+    
+    // Ajuster la photo pour mobile
+    const photoFrame = mobileBadge.querySelector('.badge-photo-frame');
+    if (photoFrame) {
+        photoFrame.style.width = "140px";
+        photoFrame.style.height = "140px";
+        photoFrame.style.marginRight = "0";
+        photoFrame.style.marginBottom = "20px";
+    }
+    
+    // Ajuster la disposition pour mobile
+    const badgeContent = mobileBadge.querySelector('.badge-content');
+    if (badgeContent) {
+        badgeContent.style.flexDirection = "column";
+        badgeContent.style.textAlign = "center";
+        badgeContent.style.alignItems = "center";
+    }
+    
+    // Ajuster le footer pour mobile
+    const badgeFooter = mobileBadge.querySelector('.badge-footer');
+    if (badgeFooter) {
+        badgeFooter.style.flexDirection = "column";
+        badgeFooter.style.gap = "15px";
+        badgeFooter.style.textAlign = "center";
+    }
+    
+    // Ajouter temporairement au DOM
+    mobileBadge.style.position = "absolute";
+    mobileBadge.style.left = "-9999px";
+    mobileBadge.style.top = "0";
+    document.body.appendChild(mobileBadge);
+    
+    html2canvas(mobileBadge, {
+        scale: 2, // Augmenter la qualité
+        width: 350, // Largeur fixe pour mobile
+        height: mobileBadge.offsetHeight * 2, // Hauteur proportionnelle
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#FFFFFF'
+    }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `badge-mobile-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
+        link.href = imgData;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        document.body.removeChild(mobileBadge); // Nettoyer
+
+        currentBadgeImage = imgData;
+        DOM.loadingOverlay.style.display = 'none';
+    }).catch(error => {
+        console.error('Erreur:', error);
+        if (document.body.contains(mobileBadge)) {
+            document.body.removeChild(mobileBadge);
+        }
+        alert('Une erreur est survenue.');
+        DOM.loadingOverlay.style.display = 'none';
+    });
+});
+
+// Ajoutez aussi cette fonction pour l'envoi par email (optionnel)
+// Modifiez la fonction sendBadgeByEmail pour utiliser le format mobile :
+
+function sendBadgeByEmail() {
+    DOM.loadingOverlay.style.display = 'flex';
+
+    // Créer le badge mobile pour l'email aussi
+    const badgeElement = document.querySelector('.badge-preview-card');
+    const mobileBadge = badgeElement.cloneNode(true);
+    
+    // Appliquer les mêmes styles mobiles
+    mobileBadge.style.width = "350px";
+    mobileBadge.style.maxWidth = "90vw";
+    mobileBadge.style.padding = "25px";
+    mobileBadge.style.margin = "0 auto";
+    
+    // Ajustements similaires...
+    // ... (repéter les ajustements de style ci-dessus)
+    
+    mobileBadge.style.position = "absolute";
+    mobileBadge.style.left = "-9999px";
+    mobileBadge.style.top = "0";
+    document.body.appendChild(mobileBadge);
+    
+    html2canvas(mobileBadge, {
+        scale: 2,
+        width: 350,
+        height: mobileBadge.offsetHeight * 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#FFFFFF'
+    }).then(canvas => {
+        currentBadgeImage = canvas.toDataURL('image/png');
+        document.body.removeChild(mobileBadge);
+        
+        // Continuer avec l'envoi d'email...
+        const templateParams = {
+            to_name: 'Organisateur FLAMBEAU',
+            from_name: `${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+            from_email: currentParticipantData.email,
+            participant_name: `${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+            participant_phone: currentParticipantData.phone,
+            participant_email: currentParticipantData.email,
+            participant_sphere: currentParticipantData.sphere,
+            message: `Badge d'ambassadeur mobile généré pour ${currentParticipantData.firstName} ${currentParticipantData.lastName}`,
+            badge_image: currentBadgeImage
+        };
+        
+        if (typeof emailjs !== 'undefined') {
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
                     DOM.loadingOverlay.style.display = 'none';
-                }).catch(error => {
-                    console.error('Erreur:', error);
-                    alert('Une erreur est survenue.');
+                    alert('Badge mobile envoyé avec succès !');
+                }, function(error) {
+                    console.error('Erreur EmailJS:', error);
                     DOM.loadingOverlay.style.display = 'none';
+                    fallbackEmail();
                 });
-            });
-
+        } else {
+            DOM.loadingOverlay.style.display = 'none';
+            fallbackEmail();
+        }
+    }).catch(error => {
+        console.error('Erreur:', error);
+        if (document.body.contains(mobileBadge)) {
+            document.body.removeChild(mobileBadge);
+        }
+        DOM.loadingOverlay.style.display = 'none';
+        alert('Une erreur est survenue lors de la génération du badge mobile.');
+    });
+}
             // Envoi Email
             DOM.sendEmailBtn.addEventListener('click', function() {
                 if (!currentBadgeImage) {
