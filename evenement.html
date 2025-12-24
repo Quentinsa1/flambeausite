@@ -1344,46 +1344,7 @@
                 DOM.badgePreviewContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
-            // Téléchargement PDF
-            DOM.downloadPdfBtn.addEventListener('click', function() {
-                if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
-                    alert('Erreur: Les bibliothèques nécessaires ne sont pas chargées.');
-                    return;
-                }
-
-                const badgeElement = document.querySelector('.badge-preview-card');
-                
-                DOM.loadingOverlay.style.display = 'flex';
-                
-                html2canvas(badgeElement, {
-                    scale: 3,
-                    useCORS: true,
-                    logging: false,
-                    backgroundColor: '#FFFFFF'
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF({
-                        orientation: 'portrait',
-                        unit: 'mm',
-                        format: [100, 140]
-                    });
-
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save(`badge-ambassadeur-${currentParticipantData.firstName}-${currentParticipantData.lastName}.pdf`);
-
-                    currentBadgeImage = imgData;
-                    DOM.loadingOverlay.style.display = 'none';
-                }).catch(error => {
-                    console.error('Erreur:', error);
-                    alert('Une erreur est survenue.');
-                    DOM.loadingOverlay.style.display = 'none';
-                });
-            });
-
+        
             // Téléchargement Image
             DOM.downloadImageBtn.addEventListener('click', function() {
                 if (typeof html2canvas === 'undefined') {
