@@ -1345,8 +1345,7 @@
             });
 
         
-            // Téléchargement Image
-// Dans la section de téléchargement d'image, modifiez le code comme suit :
+// Remplacez la fonction de téléchargement d'image par ce code :
 
 DOM.downloadImageBtn.addEventListener('click', function() {
     if (typeof html2canvas === 'undefined') {
@@ -1361,81 +1360,187 @@ DOM.downloadImageBtn.addEventListener('click', function() {
     // Créer une copie de l'élément pour le mobile
     const mobileBadge = badgeElement.cloneNode(true);
     
-    // Appliquer les styles pour mobile
-    mobileBadge.style.width = "350px"; // Largeur réduite pour mobile
-    mobileBadge.style.maxWidth = "90vw"; // Maximum 90% de la largeur de l'écran
-    mobileBadge.style.padding = "25px";
+    // Dimensions fixes pour une seule page mobile (format portrait)
+    const mobileWidth = 350; // Largeur fixe pour mobile
+    const mobileHeight = 500; // Hauteur fixe pour tenir sur une seule page
+    
+    // Appliquer les styles pour mobile - format portrait
+    mobileBadge.style.width = mobileWidth + "px";
+    mobileBadge.style.height = mobileHeight + "px";
+    mobileBadge.style.overflow = "hidden"; // Empêcher le dépassement
+    mobileBadge.style.padding = "20px";
     mobileBadge.style.margin = "0 auto";
+    mobileBadge.style.display = "flex";
+    mobileBadge.style.flexDirection = "column";
+    
+    // Ajuster la hauteur de l'élément principal
+    const badgeContentElement = mobileBadge.querySelector('.badge-content');
+    const badgeMissionElement = mobileBadge.querySelector('.badge-mission');
+    const badgeFooterElement = mobileBadge.querySelector('.badge-footer');
+    
+    // Redimensionner dynamiquement les sections
+    if (badgeContentElement) {
+        badgeContentElement.style.flex = "1";
+        badgeContentElement.style.minHeight = "0"; // Permettre le redimensionnement
+        badgeContentElement.style.overflow = "hidden";
+    }
+    
+    if (badgeMissionElement) {
+        badgeMissionElement.style.flexShrink = "0";
+        badgeMissionElement.style.padding = "15px";
+        badgeMissionElement.style.marginBottom = "15px";
+    }
+    
+    if (badgeFooterElement) {
+        badgeFooterElement.style.flexShrink = "0";
+        badgeFooterElement.style.paddingTop = "15px";
+    }
     
     // Ajuster les polices pour mobile
     const logo = mobileBadge.querySelector('.badge-logo');
     const title = mobileBadge.querySelector('.badge-title');
+    const subtitle = mobileBadge.querySelector('.badge-subtitle');
     const name = mobileBadge.querySelector('.badge-name');
+    const phone = mobileBadge.querySelector('.badge-phone');
     const missionTitle = mobileBadge.querySelector('.mission-title');
+    const missionText = mobileBadge.querySelector('.mission-text');
+    const contactLabels = mobileBadge.querySelectorAll('.contact-label');
+    const contactInfos = mobileBadge.querySelectorAll('.contact-info');
     
-    if (logo) logo.style.fontSize = "2rem";
-    if (title) title.style.fontSize = "1.8rem";
-    if (name) name.style.fontSize = "1.8rem";
-    if (missionTitle) missionTitle.style.fontSize = "1.5rem";
+    if (logo) logo.style.fontSize = "1.8rem";
+    if (title) title.style.fontSize = "1.6rem";
+    if (subtitle) subtitle.style.fontSize = "0.9rem";
+    if (name) name.style.fontSize = "1.5rem";
+    if (phone) phone.style.fontSize = "1rem";
+    if (missionTitle) missionTitle.style.fontSize = "1.3rem";
+    if (missionText) missionText.style.fontSize = "0.9rem";
+    if (contactLabels) contactLabels.forEach(el => el.style.fontSize = "0.8rem");
+    if (contactInfos) contactInfos.forEach(el => el.style.fontSize = "0.85rem");
     
-    // Ajuster la photo pour mobile
+    // Ajuster la photo pour mobile - taille réduite
     const photoFrame = mobileBadge.querySelector('.badge-photo-frame');
     if (photoFrame) {
-        photoFrame.style.width = "140px";
-        photoFrame.style.height = "140px";
+        photoFrame.style.width = "100px";
+        photoFrame.style.height = "100px";
         photoFrame.style.marginRight = "0";
-        photoFrame.style.marginBottom = "20px";
+        photoFrame.style.marginBottom = "15px";
+        photoFrame.style.marginTop = "10px";
+        
+        // Ajuster l'icône de placeholder si présente
+        const placeholder = mobileBadge.querySelector('.badge-photo-placeholder');
+        if (placeholder) placeholder.style.fontSize = "2rem";
     }
     
-    // Ajuster la disposition pour mobile
+    // Ajuster la date
+    const badgeDate = mobileBadge.querySelector('.badge-date');
+    if (badgeDate) badgeDate.style.fontSize = "0.8rem";
+    
+    // Ajuster la sphère
+    const badgeSphere = mobileBadge.querySelector('.badge-sphere');
+    if (badgeSphere) badgeSphere.style.fontSize = "0.8rem";
+    
+    // Réorganiser la disposition en colonne
     const badgeContent = mobileBadge.querySelector('.badge-content');
     if (badgeContent) {
         badgeContent.style.flexDirection = "column";
         badgeContent.style.textAlign = "center";
         badgeContent.style.alignItems = "center";
+        badgeContent.style.justifyContent = "flex-start";
     }
     
-    // Ajuster le footer pour mobile
+    // Ajuster le header
+    const badgeHeader = mobileBadge.querySelector('.badge-header');
+    if (badgeHeader) {
+        badgeHeader.style.marginBottom = "20px";
+        badgeHeader.style.paddingBottom = "15px";
+    }
+    
+    // Ajuster le footer pour mobile - sur une seule ligne
     const badgeFooter = mobileBadge.querySelector('.badge-footer');
     if (badgeFooter) {
-        badgeFooter.style.flexDirection = "column";
-        badgeFooter.style.gap = "15px";
+        badgeFooter.style.flexDirection = "row";
+        badgeFooter.style.gap = "5px";
         badgeFooter.style.textAlign = "center";
+        badgeFooter.style.paddingTop = "10px";
+        badgeFooter.style.borderTop = "1px solid var(--light-gray)";
+        badgeFooter.style.flexWrap = "wrap"; // Permettre le passage à la ligne si nécessaire
+        badgeFooter.style.justifyContent = "space-around";
     }
+    
+    // Ajuster les éléments de contact
+    const badgeContacts = mobileBadge.querySelectorAll('.badge-contact');
+    badgeContacts.forEach(contact => {
+        contact.style.flex = "1";
+        contact.style.minWidth = "100px"; // Largeur minimale
+        contact.style.margin = "2px";
+    });
     
     // Ajouter temporairement au DOM
     mobileBadge.style.position = "absolute";
     mobileBadge.style.left = "-9999px";
     mobileBadge.style.top = "0";
+    mobileBadge.style.boxSizing = "border-box"; // Inclure padding dans la taille
     document.body.appendChild(mobileBadge);
     
-    html2canvas(mobileBadge, {
-        scale: 2, // Augmenter la qualité
-        width: 350, // Largeur fixe pour mobile
-        height: mobileBadge.offsetHeight * 2, // Hauteur proportionnelle
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#FFFFFF'
-    }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.download = `badge-mobile-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
-        link.href = imgData;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        document.body.removeChild(mobileBadge); // Nettoyer
+    // Attendre que le rendu soit terminé
+    setTimeout(() => {
+        html2canvas(mobileBadge, {
+            scale: 3, // Haute résolution pour mobile
+            width: mobileWidth,
+            height: mobileHeight,
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#FFFFFF',
+            windowWidth: mobileWidth,
+            windowHeight: mobileHeight
+        }).then(canvas => {
+            // Vérifier si tout le contenu est visible
+            const contentHeight = mobileBadge.scrollHeight;
+            if (contentHeight > mobileHeight) {
+                console.warn("Le contenu dépasse légèrement, ajustement automatique...");
+                
+                // Réessayer avec une hauteur légèrement plus grande
+                const adjustedHeight = Math.min(contentHeight, 550); // Maximum 550px
+                
+                mobileBadge.style.height = adjustedHeight + "px";
+                
+                // Recapturer avec la nouvelle hauteur
+                html2canvas(mobileBadge, {
+                    scale: 3,
+                    width: mobileWidth,
+                    height: adjustedHeight,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#FFFFFF'
+                }).then(adjustedCanvas => {
+                    finalizeDownload(adjustedCanvas, adjustedHeight);
+                });
+            } else {
+                finalizeDownload(canvas, mobileHeight);
+            }
+            
+            function finalizeDownload(canvas, height) {
+                const imgData = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.download = `badge-mobile-${currentParticipantData.firstName}-${currentParticipantData.lastName}.png`;
+                link.href = imgData;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                document.body.removeChild(mobileBadge);
 
-        currentBadgeImage = imgData;
-        DOM.loadingOverlay.style.display = 'none';
-    }).catch(error => {
-        console.error('Erreur:', error);
-        if (document.body.contains(mobileBadge)) {
-            document.body.removeChild(mobileBadge);
-        }
-        alert('Une erreur est survenue.');
-        DOM.loadingOverlay.style.display = 'none';
-    });
+                currentBadgeImage = imgData;
+                DOM.loadingOverlay.style.display = 'none';
+            }
+        }).catch(error => {
+            console.error('Erreur:', error);
+            if (document.body.contains(mobileBadge)) {
+                document.body.removeChild(mobileBadge);
+            }
+            alert('Une erreur est survenue lors de la génération du badge.');
+            DOM.loadingOverlay.style.display = 'none';
+        });
+    }, 100);
 });
 
 // Ajoutez aussi cette fonction pour l'envoi par email (optionnel)
